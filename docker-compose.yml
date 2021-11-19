@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  server:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+    container_name: nodeBS
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./:/src/app"
+    command: "npx nodemon app.js -L" 
+    # command: "/bin/bash"
+
+  mysql:
+    image: mysql:5.7.31
+    container_name: dbBS
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      # MYSQL_DATABASE: assignment
+    volumes:
+      - ./mysql-volume:/var/lib/mysql
+  
+  phpmyadmin:
+    container_name: phpmyadminBS
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: admin
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/inquiry.css">
+        <link rel="stylesheet" href="./css/header.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+
+    <body onload="load()">
+        <button><a href="./inquiry.html">Back to inquiries</a></button>
+        <h1 id="inquirySubject"></h1>
+        <p id="name"></p>
+        <p id="email"></p>
+        <p><b>Inquiry</b></p>
+        <textarea id="inquiryBody" rows=50 cols=120></textarea>
+
+    </body>
+
+
+    <script>
+        function load() {
+            var http = new XMLHttpRequest;
+            http.open("GET", "/inquiry/inquiryDetails")
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    var data = JSON.parse(http.response);
+                    document.getElementById("name").innerHTML=`<b>Name: </b>${data.name}`;
+                    document.getElementById("email").innerHTML=`<b>Email: </b>${data.email}`
+                    document.getElementById("inquirySubject").innerHTML=`${data.subject}`
+                    document.getElementById("inquiryBody").innerHTML=data.data
+                }
+            }
+            http.send();
+        }
+    </script>
+</html>

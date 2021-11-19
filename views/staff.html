@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/staff.css">
+        <link rel="stylesheet" href="./css/header.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvoled.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+
+    <body onload=loadData(addrow)>
+        <div>
+            <button><a href="./dashboard.html">Back to Dashboard</a></button>
+            <h1>Staff details</h1>
+            <button onclick="toggleForm()">Add new staff</button>
+
+
+            <form id="addStaffForm" action="/staff/addnewstaff" method="POST"> 
+                <h2>Add new staff member</h2>
+
+                <br>
+                <label for="jobTitle">Job/Title</label>
+                <input id="jobTitle" name="jobTitle" type="text"><br>
+
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text"><br>
+                
+                <label for="dob">Date of Birth</label>
+                <input id="dob" name="dob" type="date"> <br>
+
+                <label for="phonenum">Phone Number</label>
+                <input id="phonenum" name="phonenum" type="tel"><br>
+
+                <label for="addr">Address</label>
+                <input id="addr" name="addr" type="text"><br>
+
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email"><br>
+
+                <label for="sin">SIN</label>
+                <input id="sin" name="sin" type="text"><br>
+                
+                <button type="submit" onclick="toggleForm(), addStaff()">Submit</button>
+            </form>
+            <table id="staffTable" >
+                <thead>
+                    <tr>
+                        <th>Staff ID</th>
+                        <th>Name</th>
+                        <th>Job/Title</th>
+                    </tr>
+                </thead>
+                <tbody id="staffTableBody">
+
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+
+
+
+
+    <script>
+
+        function toggleForm(){
+            var formState = document.getElementById("addStaffForm").style.display;
+            // console.log(formState);
+            if(formState == "block"){
+                document.getElementById("addStaffForm").style.display = "none";
+            }
+            else{
+                document.getElementById("addStaffForm").style.display = "block";
+            }
+        }
+
+        function test(){
+            document.getElementById('staffTableBody').innerHTML = '';
+        }
+
+        // every 10 seconds, auto update the website
+
+        function addStaff(){
+            var jobtitle = document.getElementById("jobTitle").value;
+            var name = document.getElementById("name").value;
+            var dob = document.getElementById("dob").value;
+            var phone = document.getElementById("phonenum").value;
+            var addr = document.getElementById("addr").value;
+            var email = document.getElementById("email").value;
+            var sin = document.getElementById("sin").value;
+            if(jobtitle.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
+            email.length == 0 || sin.length == 0){
+                alert("You must fill out all required fields!");
+            }
+            else{
+                setTimeout(() => {
+                    var http = new XMLHttpRequest;
+                    http.open("GET", "/staff/loadstaff", true);
+                    http.onreadystatechange = function() {
+                        if(http.readyState == 4 && http.status == 200){
+                            var data = JSON.parse(http.response);
+                            addrow(data[data.length-1]);
+                        }
+                    }
+                    http.send();
+                },500);
+            }
+        }
+
+        // improve feature: delete a single row rather than overwriting entire data table
+        function deleteStaff(id){
+            var http = new XMLHttpRequest;
+            http.open("DELETE", "/staff/deleteStaff", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    // console.log("deleted staff");
+                    // setTimeout(() => {
+                    document.getElementById('staffTableBody').innerHTML = '';
+                    loadData(addrow);
+                    // }, 500)
+                }
+            }
+            http.send(`id=${id}`);
+        }
+
+        function showMore(id){
+            console.log("showing more about staff");
+            var buttonState = document.getElementById(`more${id}`).style.display;
+            if(buttonState == "block"){
+                document.getElementById(`more${id}`).style.display = "none";
+                
+            }
+            else{
+                var http = new XMLHttpRequest;
+                http.open("PUT", "/staff/moreInfo");
+                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                http.onreadystatechange = function() {
+                    if(http.readyState == 4 && http.status == 200){
+                        setTimeout(() => {
+                            var data = JSON.parse(http.response);
+                            document.getElementById(`more${id}`).innerHTML = `
+                            Date of birth: ${data.dob}<br>
+                            Phone number: ${data.phone}<br>
+                            Address: ${data.addr}<br>
+                            Email: ${data.email}<br>
+                            SIN: ${data.sin} `;
+                            document.getElementById(`more${id}`).style.display = "block";
+                        })
+                    }
+                    
+                }
+                http.send(`id=${id}`);
+                
+            }
+        }
+
+
+        function loadData(callback){
+            var http = new XMLHttpRequest;
+            http.open("GET", "/staff/loadstaff", true);
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    var data = JSON.parse(http.response);
+                    for(var i=0; i<data.length; i+=1){
+                        callback(data[i]);
+                    }
+                }
+            }
+            http.send();
+        }
+
+
+        function addrow(data){
+            var table= document.getElementById("staffTableBody");
+            var row = table.insertRow();
+            var staffid = row.insertCell(0);
+            var name = row.insertCell(1);
+            var job = row.insertCell(2);
+            
+            row.id = `row${data.id}`;
+            staffid.innerHTML = data.id;
+            staffid.id = `staffid${data.id}`;
+            name.innerHTML = data.name;
+
+            var delButton = `<button id="deleteButton" onclick="deleteStaff(${data.id})">Delete</button>`;
+            var moreInfo = `<button id="moreButton" onclick="showMore(${data.id})">More Info</button>`
+            job.innerHTML = `${data.jobtitle} ${delButton} ${moreInfo}`;
+            
+
+            var infoP = document.createElement("p");
+            infoP.className = "infoPara";
+            infoP.id = `more${data.id}`;
+            row.appendChild(infoP);
+            
+        }
+        
+    </script>
+</html>

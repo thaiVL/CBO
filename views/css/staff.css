@@ -1,0 +1,29 @@
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  }  
+  table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  }
+
+#addStaffForm{
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+  border: 1px solid;
+  display: none;
+}
+
+#deleteButton, #moreButton{
+  float:right;
+}
+
+.infoPara{
+  position: fixed;
+  z-index: 10;
+  border: 1px solid;
+  display: none;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/inquiry.css">
+        <link rel="stylesheet" href="./css/header.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+
+    <body onload="load(addrow)">
+        <button><a href="./dashboard.html">Back to Dashboard</a></button>
+        <h1>Customer Inquiries</h1>
+        <table id="inquiryTable">
+            <thead>
+                <tr>
+                    <th>Inquiry ID</th>
+                    <th>Subject</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="inquiryTableBody">
+
+            </tbody>
+        </table>
+    </body>
+
+
+
+
+
+
+
+    <script>
+
+        document.createElement("a");
+
+        function load(callback){
+            var http = new XMLHttpRequest;
+            http.open("GET", "/inquiry/loadInquiries", true);
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    var data = JSON.parse(http.response);
+                    for(var i=0; i<data.length; i+=1){
+                        callback(data[i]);
+                    }
+                }
+            }
+            http.send();
+        }
+
+        function deleteInquiry(id){
+            var http = new XMLHttpRequest;
+            http.open("DELETE", "/inquiry/deleteInquiry", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    document.getElementById('inquiryTableBody').innerHTML = '';
+                    loadData(addrow);
+                }
+            }
+            http.send(`id=${id}`);
+        }
+
+        function viewMore(id){
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/inquiry/inquiryView", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                window.location.replace("./inquiryDetails.html");
+            }
+            http.send(`id=${id}`);
+
+        }
+
+        function addrow(data){
+            var table= document.getElementById("inquiryTableBody");
+            var row = table.insertRow();
+            var inquiryid = row.insertCell(0);
+            var subject = row.insertCell(1);
+            var action = row.insertCell(2);
+            
+            row.id = `row${data.id}`;
+            inquiryid.innerHTML = data.id;
+            inquiryid.id = `staffid${data.id}`;
+            subject.innerHTML = data.subject;
+
+            var delButton = `<button id="deleteButton" onclick="deleteInquiry(${data.id})">Delete</button>`;
+            var view = `<button type="submit" id="viewButton" onclick="viewMore(${data.id})">View</button>`
+            action.innerHTML = `${delButton} ${view}`;
+            
+        }
+
+    </script>
+
+</html>

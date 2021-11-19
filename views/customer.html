@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/customer.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/footer.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+    <body onload="loadData(addrow)">
+
+        <!-- <form action="/customerMore" method="GET">
+            <button type="submit">More</button>
+        </form> -->
+        <button><a href="./dashboard.html">Back to Dashboard</a></button>
+        <h1>Customer details</h1>
+        <button onclick="toggleForm()">Add new customer</button>
+
+        <form id="addCustForm" action="/customer/addCustomer" method="POST"> 
+            <h2>Add new customer</h2>
+
+            <br>
+            <label for="occ">Occupation</label>
+            <input id="occ" name="occ" type="text"><br>
+
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text"><br>
+            
+            <label for="dob">Date of Birth</label>
+            <input id="dob" name="dob" type="date"> <br>
+
+            <label for="phonenum">Phone Number</label>
+            <input id="phonenum" name="phonenum" type="tel"><br>
+
+            <label for="addr">Address</label>
+            <input id="addr" name="addr" type="text"><br>
+
+            <label for="email">Email Address</label>
+            <input id="email" name="email" type="email"><br>
+
+            <label for="sin">SIN</label>
+            <input id="sin" name="sin" type="text"><br>
+            
+            <button type="submit" onclick="toggleForm(), addCustomer()">Submit</button>
+        </form>
+
+        
+
+        <table id="customerTable">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="customerTableBody">
+
+            </tbody>
+        </table>
+
+
+    </body>
+
+    <footer>
+        <hr id="footerLineSep">
+        <div class="space">
+            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
+            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
+            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
+            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
+            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        function toggleForm(){
+            var formState = document.getElementById("addCustForm").style.display;
+            if(formState == "block"){
+                document.getElementById("addCustForm").style.display = "none";
+            }
+            else{
+                document.getElementById("addCustForm").style.display = "block";
+            }
+        }
+
+        function addCustomer(){
+            var occ = document.getElementById("occ").value;
+            var name = document.getElementById("name").value;
+            var dob = document.getElementById("dob").value;
+            var phone = document.getElementById("phonenum").value;
+            var addr = document.getElementById("addr").value;
+            var email = document.getElementById("email").value;
+            var sin = document.getElementById("sin").value;
+            if(occ.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
+            email.length == 0 || sin.length == 0){
+                alert("You must fill out all required fields!");
+            }
+            else{
+                setTimeout(() => {
+                    var http = new XMLHttpRequest;
+                    http.open("GET", "/customer/loadCustomer", true);
+                    http.onreadystatechange = function() {
+                        if(http.readyState == 4 && http.status == 200){
+                            var data = JSON.parse(http.response);
+                            addrow(data[data.length-1]);
+                        }
+                    }
+                    http.send();
+                },500);
+            }
+        }
+
+        function deleteCustomer(id){
+            var http = new XMLHttpRequest;
+            http.open("DELETE", "/customer/deleteCustomer", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    document.getElementById('customerTableBody').innerHTML = '';
+                    loadData(addrow);
+                }
+            }
+            http.send(`id=${id}`);
+        }
+
+        function loadData(callback){
+            var http = new XMLHttpRequest;
+            http.open("GET", "/customer/loadCustomer", true);
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    var data = JSON.parse(http.response);
+                    for(var i=0; i<data.length; i+=1){
+                        callback(data[i]);
+                    }
+                }
+            }
+            http.send();
+        }
+
+        function showMore(id){
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/customer/customerMore", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                window.location.replace("./customerMore.html");
+            }
+            http.send(`id=${id}`);
+
+        }
+
+        function addrow(data){
+            var table= document.getElementById("customerTableBody");
+            var row = table.insertRow();
+            var customerid = row.insertCell(0);
+            var name = row.insertCell(1);
+            var action = row.insertCell(2);
+            
+            row.id = `row${data.id}`;
+            customerid.innerHTML = data.id;
+            customerid.id = `staffid${data.id}`;
+            name.innerHTML = data.name;
+
+            var delButton = `<button id="deleteButton" onclick="deleteCustomer(${data.id})">Delete</button>`;
+            var moreInfo = `<button type="submit" id="moreButton" onclick="showMore(${data.id})">More Info</button>`
+            action.innerHTML = `${delButton} ${moreInfo}`;
+            
+        }
+
+
+
+    </script>
+
+</html>

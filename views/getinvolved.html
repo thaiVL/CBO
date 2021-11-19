@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/aboutus.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/footer.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+    <body>
+        <h1>Why get join us?</h1>
+        <p>
+            We always strive to defeat homelessness and help those who are in a dire situation.
+            You can join us in helping us achieve our goal to beat back homelessness rates by
+            joining our team or volunteering!<br>
+            We also take initiative to do our best to hire those who are struggling with unemployment.
+
+        </p>
+
+        <h1>Volunteer positions</h1>
+        <label for="pos">Position:</label>
+        <select name="pos" id="pos">
+            <option value="NONE">-Select an option-</option>
+            <option value="cook">Cook</option>
+            <option value="server">Kitchen Server</option>
+            <option value="fund">Fundraiser</option>
+            <option value="helper">Helper</option>
+        </select><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br>
+        <button type="submit" onclick="down()">I'd like to volunteer!</button>
+
+        <h1>Permanent positions</h1>
+        <h2>
+            <a href="#">Relations Officer</a>
+        </h2>
+            <p>Saskatoon, SK</p>
+            <p>The job of a relations officer is for managing public relations. You'll help us
+                build a relationship with communities and ensure that they get all the help they need.
+                You'll also help us with any media-related events.
+            </p>
+        
+        <h2>
+            <a href="#">Service Manager</a>
+        </h2>
+            <p>Saskatoon, SK</p>
+            <p>You'll help take care of day to day operations in our shelters. You'll help to
+                ensure that everything goes smoothly during day to day operations and help resolve
+                any external OR internal conflicts that may arise.
+            </p>
+        <h2>
+            <a href="#">Janitor</a>
+        </h2>
+            <p>Saskatoon, SK</p>
+            <p>Helping keep our buildings clean for guests is the main job of a janitor.
+                You'll also help oversee minor maintenances.
+            </p>
+    </body>
+
+
+    
+    <footer>
+        <hr id="footerLineSep">
+        <div class="space">
+            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
+            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
+            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
+            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
+            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
+        </div>
+    </footer>
+
+    <script>
+        function down(){
+            alert("Our volunteer application is currently under maintenance! We are extremely grateful and appreciate your kindness, please try again later or call us at 306-123-4567 to apply directly with one of our agents.\nThank you, and we apologize for any inconvenience!")
+        }
+    </script>
+</html>

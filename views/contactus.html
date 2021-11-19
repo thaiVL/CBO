@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Org name here</title>
+
+        <link rel="stylesheet" href="./css/contactus.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/footer.css">
+    </head>
+
+    <header>
+        <button class="headerButtons">
+            <a id="login">Log in</a>
+        </button>
+        <button class="headerButtons">
+            <a id="dashboard" href="./dashboard.html">Dashboard</a>
+        </button>
+        <button>
+            <a id="homeL" href="./index.html">Home</a>
+        </button>
+        <br>
+        <hr id="headerLineSep">
+        <div class="headerButtons">
+            <button>
+                <a id="needhelp" href="./needhelp.html">Need help?</a>
+            </button>
+            <button>
+                <a id="contactus" href="./contactus.html">Contact us</a>
+            </button>
+            <button>
+                <a id="aboutus" href="./aboutus.html">About us</a>
+            </button>
+            <button>
+                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
+            </button>
+            
+            <button class="">
+                <a id="donate" href="./donate.html">Donate</a>
+            </button>
+        </div>
+    </header>
+
+
+    <body>
+        <div class="pad">
+            <h1>Have Questions? Here are some FAQs</h1>
+            <ul>
+                <li><b>What exactly is homelessness??</b>
+                    <ul>
+                        <li>Homelessness describes the situation of an individual or family without stable, permanent, 
+                            appropriate housing, or the immediate prospect, means and ability of acquiring it</li>
+                    </ul>
+                </li>
+                <li><b>What causes a person to become homeless??</b>
+                <ul>
+                    <li>There are many many many factors that causes a person to become homeless. Some prominent ones are
+                        debt, job loss leading to permanent unemployment, mental or physical health problems and
+                        severe trauma. If you know anyone who is experience these things, please reach out and help them!
+                    </li>
+                </ul>
+            </li>
+                <li><b>I really want to help, how can I help??</b>
+                    <ul>
+                        <li>Well, I'm glad you asked! You can help us by taking a looking at
+                            our <a href="donate.html">donate page</a>! 
+                        </li>
+                    </ul>
+                </li>
+                <li><b>I'm with a news organization, may I interview you?</b>
+                    <ul>
+                        <li>Of course! We'd love to help spread awareness about the problem
+                            that we are tackling! Please just contact us by submitting a form
+                            below with the appropriate subject heading!
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>How do you collect data on homelessness?</b>
+                    <ul>
+                        <li>Well, there are several ways we do this: we often get help from a
+                            researcher who specializes in sociology and they conduct the data
+                            collection for us. We also register all persons who we help so that
+                            we know who they are in the future so everything can go smoothly 
+                            for their next visit!
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>I tried to access a link on this website, but it's broken!</b>
+                    <ul>
+                        <li>We apologize for any broken links, please report them to <a href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <b>Can I share information that I have obtained from this website?</b>
+                    <ul>
+                        <li>Of course! We just ask that you do not commercialize any information that
+                            you may find on this website as it will infringe on our copyrights!
+                        </li>
+                    </ul>
+                </li>            
+            </ul>
+
+            <h1>Do you still have questions?</h1>
+            <p>Just email us at  Just email us at <a href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a> or call us at 306-123-4567</p>
+            <p>Or you can also send us an inquiry! Just fill out the form below</p>
+            <form action="/inquiry/addInquiry" method="POST">
+                <label for="name"><b>Name</b></label><br>
+                <input type="text" id="name" name="name" placeholder="John Doe"><br><br>
+
+                <label for="email"><b>Email Address</b></label><br>
+                <input type="email" id="email" name="email" placeholder="johndoe123@mail.com"><br><br>
+
+                <label for="subject"><b>Subject</b></label><br>
+                <input type="text" id="subject" name="subject" placeholder="Inquiry Subject Header"><br><br>
+
+                <label for="data"><b>Your Inquiry</b></label><br>
+                <textarea id="data" name="data" rows=20 cols=50></textarea><br>
+
+                <button type="submit" onclick="userConfirmation()">Submit my inquiry</button>
+            </form>
+
+        </div>
+
+    </body>        
+
+    <footer>
+        <hr id="footerLineSep">
+        <div class="space">
+            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
+            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
+            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
+            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
+            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
+        </div>
+    </footer>
+</html>
+
+<script>
+    function userConfirmation(){
+        alert("Thank you for submitting your inquiry!\n It will take us approximately 3 business days to contact you. If it is urgent, please call our phone number: 306-123-4567")
+    }
+</script>
