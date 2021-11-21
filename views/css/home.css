@@ -1,21 +1,18 @@
-#ourmission, #ourimpact, #homehelp{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align:center;
-}
-
-.fontStyle{
-    font-family: Verdana, Geneva, Tahoma, sans-serif; 
-    font-size:15px;
-}
-
-#helping{
-    height: 20%; 
-    width: 20% ;
-    float: left;
-}
-
-#para1{
-    font-family: Arial, Helvetica, sans-serif;
+#jumbHeader{
+    border-radius: .3px;
+    padding: 150px 30px 70px 30px;
+    background-color: #1761e2;
+    color: white;
 }
 
 
+.parabody{
+    font-size: 17px;
+}
+
+.row-content{
+    margin: 0px auto;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+}

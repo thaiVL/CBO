@@ -6,3 +6,23 @@
     float: right;   
 }
 
+.navbarColor{
+    background-color: rgb(0, 22, 135)
+}
+
+.nav-item{
+    margin-right: 10px;
+}
+
+.fa{
+    padding-right: 5px;
+}
+
+#dashbutton{
+    margin-right: 15px;
+    visibility: hidden;
+}
+
+#logoutbtn{
+    visibility: hidden;
+}

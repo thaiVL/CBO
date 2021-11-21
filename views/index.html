@@ -1,129 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Org name here</title>
 
         <link rel="stylesheet" href="./css/home.css">
-        <link rel="stylesheet" href="./css/header.css">
-        <link rel="stylesheet" href="./css/footer.css">
     </head>
 
-
-
-    <header>
-        <button class="headerButtons">
-            <a id="login">Log in</a>
-        </button>
-        <button class="headerButtons">
-            <a id="dashboard" href="./dashboard.html">Dashboard</a>
-        </button>
-        <button>
-            <a id="homeL" href="./index.html">Home</a>
-        </button>
-        <br>
-        <hr id="headerLineSep">
-        <div class="headerButtons">
-            <button>
-                <a id="needhelp" href="./needhelp.html">Need help?</a>
-            </button>
-            <button>
-                <a id="contactus" href="./contactus.html">Contact us</a>
-            </button>
-            <button>
-                <a id="aboutus" href="./aboutus.html">About us</a>
-            </button>
-            <button>
-                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
-            </button>
-            
-            <button class="">
-                <a id="donate" href="./donate.html">Donate</a>
-            </button>
-        </div>
-        <br>
-    </header>
-
-
-
+    <div id="header"></div>
+    
     <body>
-        <div class="gethelp">
-            <h1 id="homehelp">
-                Do you or someone you know need help?
-            </h1>
-            <img src="./img/pplHelping.jpeg" id="helping">
-            <br>
-            <h3 id="para1">
-                Sometimes, it's scary to ask for help, but we're always here to provide the best help we can.
-                If you or someone you know is at risk of poverty, homelessness or hunger, please contact us
-                by clicking the button below.
-            </h3>
-            <button>
-                <a href="./needhelp.html">Our Services</a>
-            </button>
-        </div>
-        <br><br><br><br><br><br>
-        <hr>
-        <div class="mission">
-            <h1 id="ourmission">Our Mission</h1>
-            <p class="fontStyle" style="text-align: center;">
-                <b>
-                    Our vision and mission for the future is to end homelessness and hunger.
-                </b>
-            </p>
-            <center><img src="./img/Inkedendhomelessness.jpg" style="height: 20%; width:20%;"></center>
-            <h2>Our goals and values</h2>
-            <p id="values" class="fontStyle">
-                We truly believe in our vision of ending homelessness and hunger.<br>
-                All people should have the right to a permanent shelter where one calls home.<br>
-                We believe in taking action. We know failing is a possibility, we will use them as a
-                stepping stone towards out goal. <br>
-                We will act with the utmost respect and integrity for all parties involved as we work
-                towards our goal as we believe respect and integrity is a basic human right.<br>
-                We believe in providing hope and opportunity for those who are struggling. <br>
-                We are committed to equity, diversity and inclusion – We will model and promote equity, 
-                diversity and inclusion in our organization and our work. <br>
-                We seek to take a leadership role in opening doors to greater equity, success and opportunity for marginalized Canadians struggling in 
-                homelessness and housing instability. We are vocal advocates for the voice of lived experience 
-                and the empowerment of people experiencing homelessness.<br>
-            </p>
+
+        <div class="jumbotron" id="jumbHeader">
+            <div class="container">
+                <div class="row row-header">
+                    <div class="col-12 col-sm-6">
+                        <h1>Help The Homeless</h1>
+                        <p>We strive to help all those who are struggling with poverty, hunger and homelessness. Be
+                            part of the change and join us in making everyone's lives better and providing hope for all!
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-6 d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <img src="./img/logo.png" class="img-fluid" height="200" width="200">
+                            </div>
+                            <div class="col-12 col-sm-6 align-self-center">
+                                <h4>We'd appreciate any kind donations.</h4>
+                                <a class="btn btn-success btn-lg" role="btn" href="donate.html">Donate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="impact">
-            <h1 id="ourimpact">Our impact so far</h1>
-            <img src="./img/personSmiling.jpeg" style="height:25%;width:25%; margin: auto; display:block;">
-            <p class="fontStyle">
-                We've helped millions of homeless people off the streets by providing them career opportunities
-                with our partners and donors. Our impact reach across the nation with over 300 branches spanning
-                across Canada. Each branch has passionate and caring members who are sharing and working towards
-                the same goal as we are as an organization. We've helped thousands of homeless teenagers and
-                helped them obtain and education and worked with hundreds of thousands of families at risk of
-                poverty and homelessness to alleviate their situation. On each and every step of our journey, we
-                strive to equally provide any opportunities that we can to those who need it the most.
-                We've helped out thousands of communities suffering from loss of employment due to COVID-19.
-            </p>
+        <div class="container">
+            <div class="row row-content">
+                <div class="col col-sm order-sm-first col-md">
+                    <div class="media">
+                        <img class="float-start d-flex mr-3 img-thumbnail align-self-center img-fluid" src="img/helpinghand.png" alt="helpinghand"
+                             style="margin-right:10px; width:25%; height:25%">
+                        <div class="media-body">
+                            <h1 class="mt-0 media-heading">Do you or someone you know needs help?</h1>
+                            <div class="row">
+                                <p class="parabody d-none d-md-block">
+                                    We know it's very hard to ask someone for help, especially if they're someone whom you've never met before.
+                                    We understand that some perceive asking help as a sign of weakness or failure, but that's simply not true.
+                                    Asking for help is the first step to getting a person's life back on track, whether it is dealing with
+                                    homelessness or any other issue. We understand the fear of asking for help, but we're always here to
+                                    provide the best help that we can at all possible times. So if you or someone you know is at risk of
+                                    poverty, homelessness or hunger, please click the button below to contact us and read about our services
+                                    that we provide. We encourage all who are in need to reach out.
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-9">
+                                    <h5 class="d-none d-md-block">We're always here to lend a helping hand</h5>
+                                    <a class="btn btn-primary" href="needhelp.html">Our Services</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row row-content">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <h1 style="margin-bottom:40px">Our Mission</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <h4 class="d-none d-md-block">Our end goal and mission is to end all homelessness and hunger. To reach our goal,
+                            we strive to provide basic necessities and shelter for anyone and any family that
+                            comes through our doors.
+                        </h4>
+                        <h4 class="d-sm-block d-md-none">Our mission and goal is to end all homelessness and hunger</h4>
+                    </div>
+                    <div class="col align-self-center">
+                        <img class="img-fluid" src="img/Inkedendhomelessness.jpg" style="height:50%; width:50%">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row row-content">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center bg-image" style="background-image: url(img/value.jpg)">
+                        <h1 style="margin-bottom: 20px;">Our values</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Quality</b> - providing high quality, client-centred programs and working towards continuous improvement on behalf of the children and families we serve.
+                        </p>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Caring</b> - serving our families with respect, dignity, empathy and compassion, and celebrating the diversity and uniqueness of each individual.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Advocacy</b> - working towards ending the cycles of violence and poverty through advocacy and empowerment of our clients.
+                        </p>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Collaboration</b> - building effective relationships among clients, volunteers, donors and staff, and seeking opportunities to form partnerships with the broader community.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Integrity</b> - delivering accessible, flexible, and transparent services while acting with integrity in a professional, ethical, non-judgemental, honest manner at all times.
+                        </p>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Accountability</b> - measuring, achieving and reporting results and using funder and donor dollars wisely.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Inclusivity</b> - committed to equity, diversity and inclusion – We will model and promote equity, diversity and inclusion in our organization and our work.
+                        </p>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <p class="parabody">
+                            <b>Mutual Respect</b> - We will act with the utmost respect and integrity for all parties involved as we work towards our goal as we believe respect and integrity is a basic human right.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        
+
+
+
 
     </body>
 
 
 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
-    <footer>
-        <hr id="footerLineSep">
-        <div class="space">
-            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
-            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
-            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
-            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
-            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
-        </div>
-    </footer>
-
-
-
-
-
+    <script>
+        $(() => {
+            $("#header").load("header.html");
+        })
+    </script>
 
 
 
