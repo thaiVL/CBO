@@ -1,29 +1,52 @@
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  }  
-  table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 50%;
-  }
+/*td, th {*/
+/*  border: 1px solid #dddddd;*/
+/*  text-align: left;*/
+/*  padding: 8px;*/
+/*  }  */
+/*  table {*/
+/*  font-family: arial, sans-serif;*/
+/*  border-collapse: collapse;*/
+/*  width: 50%;*/
+/*  }*/
 
-#addStaffForm{
-  position: fixed;
-  z-index: 10;
-  background-color: white;
-  border: 1px solid;
-  display: none;
+/*#addStaffForm{*/
+/*  position: fixed;*/
+/*  z-index: 10;*/
+/*  background-color: white;*/
+/*  border: 1px solid;*/
+/*  display: none;*/
+/*}*/
+
+/*#deleteButton, #moreButton{*/
+/*  float:right;*/
+/*}*/
+
+/*.infoPara{*/
+/*  position: fixed;*/
+/*  z-index: 10;*/
+/*  border: 1px solid;*/
+/*  display: none;*/
+/*}*/
+
+.table-title{
+  background-color: #378de8;
+  padding: 10px 20px 10px 20px;
+  border-radius: 3px 3px 0 0;
 }
 
-#deleteButton, #moreButton{
+.table-title h2{
+  color: white;
+}
+
+.table-title .btn{
+  margin-top: 5px;
   float:right;
 }
 
-.infoPara{
-  position: fixed;
-  z-index: 10;
-  border: 1px solid;
-  display: none;
+.table-title .btn:hover{
+  border: none;
+  outline: none;
+  color: white;
+  background: #4cea30;
 }
+
