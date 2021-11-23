@@ -1,0 +1,5 @@
+Nov 22 - navbar not collapsing.
+    Fix: only load scripts on a single page, so remove script for jquery and stuff as well as bootstrap css and stuff for header
+        and footer. Doing this fixes the navbar not collapsing.
+        So now, header and footer will look ugly by itself, but when loaded into the core html files, it'll look normal
+        and pretty.

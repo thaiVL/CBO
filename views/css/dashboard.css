@@ -1,5 +1,11 @@
-.selection{
-    padding-top: 15px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30px;
+.textStyle{
+    text-decoration: none;
+    color: black;
 }
+
+.buttonImg{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+

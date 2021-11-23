@@ -10,9 +10,10 @@
     font-size: 17px;
 }
 
-.row-content{
-    margin: 0px auto;
+.section{
+    margin-bottom: 70px;
     padding: 50px 0px 50px 0px;
-    border-bottom: 1px ridge;
+    border-bottom: 3px ridge;
     min-height: 400px;
 }
+

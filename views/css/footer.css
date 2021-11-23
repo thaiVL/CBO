@@ -1,24 +1,14 @@
-#footerLineSep{
-    border-top: 1px solid blue;
+.footer{
+    background-color: #D1C4E9;
+    margin: 100px 0px 0px 0px;
+    padding: 20px 0px 20px 0px;
+    font-size: 18px;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*width: 100%;*/
 }
 
-.space{
-    margin-top: 50px;
-    padding-left: 200px;
-    padding-right: 200px;
-}
-
-.left{
-    text-align:left;
-    display: block;
-}
-
-.mid{
-    text-align:center;
-    display: block;
-}
-
-.right{
-    text-align:right;
-    display:block;
+.fa{
+    padding-right: 5px;
+    padding-left: 5px;
 }

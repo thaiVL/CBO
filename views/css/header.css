@@ -1,14 +1,8 @@
-#headerLineSep{
-    border-top: 1px solid blue;
+.navbarSetting{
+    background-color: rgb(0, 22, 135);
 }
 
-.headerButtons{
-    float: right;   
-}
 
-.navbarColor{
-    background-color: rgb(0, 22, 135)
-}
 
 .nav-item{
     margin-right: 10px;
