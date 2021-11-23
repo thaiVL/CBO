@@ -18,33 +18,33 @@
             <button onclick="toggleForm()">Add new staff</button>
 
 
-            <form id="addStaffForm" action="/staff/addnewstaff" method="POST">
-                <h2>Add new staff member</h2>
+<!--            <form id="addStaffForm" action="/staff/addnewstaff" method="POST">-->
+<!--                <h2>Add new staff member</h2>-->
 
-                <br>
-                <label for="jobTitle">Job/Title</label>
-                <input id="jobTitle" name="jobTitle" type="text"><br>
+<!--                <br>-->
+<!--                <label for="jobTitle">Job/Title</label>-->
+<!--                <input id="jobTitle" name="jobTitle" type="text"><br>-->
 
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text"><br>
+<!--                <label for="name">Name</label>-->
+<!--                <input id="name" name="name" type="text"><br>-->
 
-                <label for="dob">Date of Birth</label>
-                <input id="dob" name="dob" type="date"> <br>
+<!--                <label for="dob">Date of Birth</label>-->
+<!--                <input id="dob" name="dob" type="date"> <br>-->
 
-                <label for="phonenum">Phone Number</label>
-                <input id="phonenum" name="phonenum" type="tel"><br>
+<!--                <label for="phonenum">Phone Number</label>-->
+<!--                <input id="phonenum" name="phonenum" type="tel"><br>-->
 
-                <label for="addr">Address</label>
-                <input id="addr" name="addr" type="text"><br>
+<!--                <label for="addr">Address</label>-->
+<!--                <input id="addr" name="addr" type="text"><br>-->
 
-                <label for="email">Email Address</label>
-                <input id="email" name="email" type="email"><br>
+<!--                <label for="email">Email Address</label>-->
+<!--                <input id="email" name="email" type="email"><br>-->
 
-                <label for="sin">SIN</label>
-                <input id="sin" name="sin" type="text"><br>
+<!--                <label for="sin">SIN</label>-->
+<!--                <input id="sin" name="sin" type="text"><br>-->
 
-                <button type="submit" onclick="toggleForm(), addStaff()">Submit</button>
-            </form>
+<!--                <button type="submit" onclick="toggleForm(), addStaff()">Submit</button>-->
+<!--            </form>-->
             <table id="staffTable" >
                 <thead>
                     <tr>
@@ -89,57 +89,71 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="jobTitle">Job Title</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="Ex: Cook">
+
+                        <form class="form-inline" action="/staff/addnewstaff" method="POST">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="jobTitle">Job Title</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="jobTitle" name="jobTitle" placeholder="Ex: Cook">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="name">Name</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="name">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="dob">Date of Birth</label>
-                            <div class="col-md-10">
-                                <input type="date" class="form-control" id="dob" name="dob">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="dob">Date of Birth</label>
+                                <div class="col-md-10">
+                                    <input type="date" class="form-control" id="dob" name="dob">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="phonenum">Phone Number</label>
-                            <div class="col-md-10">
-                                <input type="tel" class="form-control" id="phonenum" name="phonenum" placeholder="Ex: 123 456 7890">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="phonenum">Phone Number</label>
+                                <div class="col-md-10">
+                                    <input type="tel" class="form-control" id="phonenum" name="phonenum" placeholder="Ex: 123 456 7890">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="addr">Address</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="addr" name="addr" placeholder="Ex: 123 Street">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="addr">Address</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="addr" name="addr" placeholder="Ex: 123 Street">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="email">Email Address</label>
-                            <div class="col-md-10">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="email">Email Address</label>
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2" for="sin">SIN</label>
-                            <div class="col-md-10">
-                                <input type="tel" class="form-control" id="sin" name="sin" placeholder="Ex: 0987 1234 4567">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="sin">SIN</label>
+                                <div class="col-md-10">
+                                    <input type="tel" class="form-control" id="sin" name="sin" placeholder="Ex: 0987 1234 4567">
+                                </div>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-primary" onclick="addStaff()" id="submitBtn">
+                                Submit new staff</button>
+
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
+                                <strong>Missing required fields!</strong> You need to fill out all required fields below!
+                                <button type="button" class="btn-close"></button>
+                            </div>
 
 
-
+                            <div class="alert alert-success alert-dismissible collapse" role="alert" id="staffSuccess">
+                                <strong>Successfully added new staff!</strong>
+                                <button type="button" class="btn-close"></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+
 
 
 
@@ -162,22 +176,11 @@
             $("#header").load("header.html");
             $("#footer").load("footer.html");
         })
-        function toggleForm(){
-            var formState = document.getElementById("addStaffForm").style.display;
-            // console.log(formState);
-            if(formState == "block"){
-                document.getElementById("addStaffForm").style.display = "none";
-            }
-            else{
-                document.getElementById("addStaffForm").style.display = "block";
-            }
-        }
 
-        function test(){
-            document.getElementById('staffTableBody').innerHTML = '';
-        }
-
-        // every 10 seconds, auto update the website
+        // Handles all button closing clicks
+        $('.btn-close').click(function(){
+            $(this).parent().hide("fade");
+        });
 
         function addStaff(){
             var jobtitle = document.getElementById("jobTitle").value;
@@ -189,7 +192,10 @@
             var sin = document.getElementById("sin").value;
             if(jobtitle.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
             email.length == 0 || sin.length == 0){
-                alert("You must fill out all required fields!");
+                $("#missingField").show("fade");
+                setTimeout(() => {
+                    $("#missingField").hide("fade");
+                },10000);
             }
             else{
                 setTimeout(() => {
@@ -199,6 +205,10 @@
                         if(http.readyState == 4 && http.status == 200){
                             var data = JSON.parse(http.response);
                             addrow(data[data.length-1]);
+                            $("#staffSuccess").show("fade");
+                            setTimeout(() => {
+                                $("#staffSuccess").hide("fade");
+                            }, 5000);
                         }
                     }
                     http.send();
