@@ -28,6 +28,12 @@
 /*  display: none;*/
 /*}*/
 
+.jumbotron{
+  padding-top: 100px;
+  margin-bottom: 100px;
+  background-color: #e2cece;
+}
+
 .table-title{
   background-color: #378de8;
   padding: 10px 20px 10px 20px;
@@ -50,6 +56,17 @@
   background: #4cea30;
 }
 
-#missingField{
-  /*display: none;*/
+.hiddenRow{
+  padding: 0 !important;
+}
+
+.acrdBtn{
+  height: 35px;
+  /*width: 80px;*/
+
+}
+
+.delBtn{
+
+  float: right;
 }

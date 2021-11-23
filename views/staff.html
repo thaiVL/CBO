@@ -12,52 +12,19 @@
 
 
     <body onload=loadData(addrow)>
-        <div>
-            <button><a href="./dashboard.html">Back to Dashboard</a></button>
-            <h1>Staff details</h1>
-            <button onclick="toggleForm()">Add new staff</button>
 
-
-<!--            <form id="addStaffForm" action="/staff/addnewstaff" method="POST">-->
-<!--                <h2>Add new staff member</h2>-->
-
-<!--                <br>-->
-<!--                <label for="jobTitle">Job/Title</label>-->
-<!--                <input id="jobTitle" name="jobTitle" type="text"><br>-->
-
-<!--                <label for="name">Name</label>-->
-<!--                <input id="name" name="name" type="text"><br>-->
-
-<!--                <label for="dob">Date of Birth</label>-->
-<!--                <input id="dob" name="dob" type="date"> <br>-->
-
-<!--                <label for="phonenum">Phone Number</label>-->
-<!--                <input id="phonenum" name="phonenum" type="tel"><br>-->
-
-<!--                <label for="addr">Address</label>-->
-<!--                <input id="addr" name="addr" type="text"><br>-->
-
-<!--                <label for="email">Email Address</label>-->
-<!--                <input id="email" name="email" type="email"><br>-->
-
-<!--                <label for="sin">SIN</label>-->
-<!--                <input id="sin" name="sin" type="text"><br>-->
-
-<!--                <button type="submit" onclick="toggleForm(), addStaff()">Submit</button>-->
-<!--            </form>-->
-            <table id="staffTable" >
-                <thead>
-                    <tr>
-                        <th>Staff ID</th>
-                        <th>Name</th>
-                        <th>Job/Title</th>
-                    </tr>
-                </thead>
-                <tbody id="staffTableBody">
-
-                </tbody>
-            </table>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row row-header">
+                    <div class="col-12 col-sm-6">
+                        <h1>Staff Management</h1>
+                        <p>Administration settings. Add, delete or edit staff information.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
 
 
@@ -68,13 +35,57 @@
             <div class="table-title" id="staffTableTitle">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Staff Management</h2>
+                        <h2>Staff</h2>
                     </div>
                     <div class="col-sm-7">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaff"><span class="fa fa-user-plus">Add Staff</span></button>
                     </div>
                 </div>
             </div>
+
+            <table class="table table-bordered" id="staffTable">
+                <thead>
+                    <tr>
+                        <th>Staff ID</th>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="staffTableBody">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-3">
+                                    <button class="btn btn-primary delBtn"><span class="fa fa-trash"></span></button>
+                                </div>
+                                <div class="col">
+                                    <div class="accordion" id="parentAc">
+                                        <div class="accordion-item">
+                                            <h4 class="accordion-header">
+                                                <button class="accordion-button collapsed acrdBtn" type="button" data-bs-toggle="collapse" data-bs-target="#testAc">
+                                                    Show More
+                                                </button>
+                                            </h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hiddenRow" colspan="6">
+                            <div class="accordion-body collapse" id="testAc">
+                                TESTING 123 AFKJALFKALKMAELKMAEKLFM AMAFMAWFKLJWAFLJAW FWANFJNFAWJFUAYIUAYFDADNF AFASNABMSFNASB FAUFHAF(&*
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -138,13 +149,13 @@
 
                             <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
                                 <strong>Missing required fields!</strong> You need to fill out all required fields below!
-                                <button type="button" class="btn-close"></button>
+                                <button type="button" class="btn-close alertClose"></button>
                             </div>
 
 
                             <div class="alert alert-success alert-dismissible collapse" role="alert" id="staffSuccess">
                                 <strong>Successfully added new staff!</strong>
-                                <button type="button" class="btn-close"></button>
+                                <button type="button" class="btn-close alertClose"></button>
                             </div>
                         </form>
                     </div>
@@ -152,7 +163,6 @@
             </div>
         </div>
     </div>
-
 
 
 
@@ -178,7 +188,7 @@
         })
 
         // Handles all button closing clicks
-        $('.btn-close').click(function(){
+        $('.alertClose').click(function(){
             $(this).parent().hide("fade");
         });
 
@@ -287,11 +297,13 @@
             var staffid = row.insertCell(0);
             var name = row.insertCell(1);
             var job = row.insertCell(2);
+            var action = row.insertCell(3);
             
             row.id = `row${data.id}`;
             staffid.innerHTML = data.id;
             staffid.id = `staffid${data.id}`;
             name.innerHTML = data.name;
+
 
             var delButton = `<button id="deleteButton" onclick="deleteStaff(${data.id})">Delete</button>`;
             var moreInfo = `<button id="moreButton" onclick="showMore(${data.id})">More Info</button>`
