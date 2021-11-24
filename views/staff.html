@@ -126,6 +126,11 @@
                                 <button type="button" class="btn-close alertClose"></button>
                             </div>
 
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="numErr">
+                                <strong>Field input error!</strong> Phone number and SIN can only be numbers!
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+
 
                             <div class="alert alert-success alert-dismissible collapse" role="alert" id="staffSuccess">
                                 <strong>Successfully added new staff!</strong>
@@ -181,6 +186,12 @@
                     $("#missingField").hide("fade");
                 },10000);
             }
+            else if(!isNaN(phone) || isNaN(sin)){
+                $("#numErr").show("fade");
+                setTimeout(() => {
+                    $("#numErr").hide("fade");
+                },10000);
+            }
             else{
                 setTimeout(() => {
                     var http = new XMLHttpRequest;
@@ -219,37 +230,125 @@
         }
 
         function showMore(id){
-            console.log("showing more about staff");
-            var buttonState = document.getElementById(`more${id}`).style.display;
-            if(buttonState == "block"){
-                document.getElementById(`more${id}`).style.display = "none";
-                
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/staff/moreInfo");
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    setTimeout(() => {
+                        var data = JSON.parse(http.response);
+                        document.getElementById(`more${id}`).innerHTML = `
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible collapse" role="alert" id="updateSuccess${id}">
+                                <strong>Successfully updated staff!</strong>
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="updateFailed${id}">
+                                <strong>Missing fields!</strong> Please make sure all fields are filled out!
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="col-9">
+                                <h3>Staff ID: ${id}</h3>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary" style="float: right;" onclick="update(${id})">
+                                    Save Edit<span class="fa fa-pencil"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="name${id}">Full Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="name${id}" name="name${id}" value="${data.name}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="jobtitle${id}">Job Title</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="jobtitle${id}" name="jobtitle${id}" value="${data.jobtitle}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="dob${id}">Date of Birth</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="dob${id}" name="dob${id}" value="${data.dob}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="phonenum${id}">Phone Number</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="phonenum${id}" name="phonenum${id}" value="${data.phone}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="addr${id}">Address</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addr${id}" name="addr${id}" value="${data.addr}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="email${id}">Email</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="email${id}" name="email${id}" value="${data.email}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="sin${id}">SIN</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="sin${id}" name="sin${id}" value="${data.sin}">
+                            </div>
+                        </div> `;
+                    })
+                }
+            }
+            if(document.getElementById(`more${id}`).innerHTML === ""){
+                console.log("Requesting data from server...")
+                http.send(`id=${id}`);
+            }
+        }
+
+
+        function update(id){
+
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/staff/updateInfo");
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    // console.log("Update work")
+                    $(`#updateSuccess${id}`).show();
+                    setTimeout(() => {
+                        $(`#updateSuccess${id}`).hide();
+                    }, 3000);
+                    document.getElementById(`nameC${id}`).innerHTML = document.getElementById(`name${id}`).value;
+                    document.getElementById(`jobC${id}`).innerHTML = document.getElementById(`jobtitle${id}`).value;
+                }
+                else{
+
+                }
+            }
+            var name = document.getElementById(`name${id}`).value;
+            var job = document.getElementById(`jobtitle${id}`).value;
+            var dob = document.getElementById(`dob${id}`).value;
+            var phone = document.getElementById(`phonenum${id}`).value;
+            var addr = document.getElementById(`addr${id}`).value;
+            var email = document.getElementById(`email${id}`).value;
+            var sin = document.getElementById(`sin${id}`).value;
+            if(job.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
+                email.length == 0 || sin.length == 0){
+                // console.log("update failed")
+                $(`#updateFailed${id}`).show();
+                setTimeout(() => {
+                    $(`#updateFailed${id}`).hide();
+                },3000);
             }
             else{
-                var http = new XMLHttpRequest;
-                http.open("PUT", "/staff/moreInfo");
-                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-                http.onreadystatechange = function() {
-                    if(http.readyState == 4 && http.status == 200){
-                        setTimeout(() => {
-                            var data = JSON.parse(http.response);
-                            document.getElementById(`more${id}`).innerHTML = `
-                            Staff ID: ${data.id}<br>
-                            Full Name: ${data.name}<br>
-                            Date of birth: ${data.dob}<br>
-                            Phone number: ${data.phone}<br>
-                            Address: ${data.addr}<br>
-                            Email: ${data.email}<br>
-                            SIN: ${data.sin} `;
-                            document.getElementById(`more${id}`).style.display = "block";
-                        })
-                    }
-                    
-                }
-                http.send(`id=${id}`);
-                
+                http.send(`id=${id}&name=${name}&job=${job}&dob=${dob}&phone=${phone}&addr=${addr}&email=${email}&sin=${sin}`);
             }
+
+
         }
 
 
@@ -283,7 +382,9 @@
             staffid.innerHTML = data.id;
             staffid.id = `staffid${data.id}`;
             name.innerHTML = data.name;
+            name.id = `nameC${data.id}`;
             job.innerHTML = data.jobtitle;
+            job.id = `jobC${data.id}`;
             action.innerHTML = `
                 <div class="btn-group" role="group">
                     <div class="accordion">
@@ -299,8 +400,7 @@
             moreInfoRow.innerHTML = `
                 <tr>
                     <td class="hiddenRow" colspan="6">
-                        <div class="accordion-body collapse" id="more${data.id}">
-                        </div>
+                        <div class="accordion-body collapse" id="more${data.id}"></div>
                     </td>
                 </tr>`;
         }

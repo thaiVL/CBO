@@ -1,3 +1,8 @@
+Todo:
+    Error handling in staff.html
+        - make sure phone num and sin num are integers
+
+Bugs
 Nov 22 - navbar not collapsing.
     Fix: only load scripts on a single page, so remove script for jquery and stuff as well as bootstrap css and stuff for header
         and footer. Doing this fixes the navbar not collapsing.

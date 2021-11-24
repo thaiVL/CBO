@@ -27,6 +27,7 @@ con.connect((err) =>{
 });
 
 
+
 router.get("/endCon",(req, res)=>{
     con.end((err) => {
         if(err){
@@ -38,13 +39,19 @@ router.get("/endCon",(req, res)=>{
     })
 })
 
+function isNumeric(val) {
+    return /^-?\d+$/.test(val);
+}
+
 async function addNewStaff(data){
     return new Promise((resolve, reject) => {
-        var query = `INSERT INTO staff (name, jobtitle, dob, phone, addr, email, sin) 
+        if(!(isNumeric(data.sin) && isNumeric(data.phonenum))){
+            reject("Error: can only be numbers")
+        }
+        var query = `INSERT INTO staff (name, jobtitle, dob, phone, addr, email, sin)
         VALUES ('${data.name}', '${data.jobTitle}', '${data.dob}','${data.phonenum}','${data.addr}','${data.email}','${data.sin}');`
         con.query(query, (err, result) => {
             if(err){
-                // console.log(err);
                 reject(err);
             }
             else{
@@ -52,6 +59,21 @@ async function addNewStaff(data){
             }
         });
     });
+}
+
+async function updateStaff(data){
+    return new Promise((resolve, reject) => {
+        var query = `UPDATE staff SET name = '${data.name}', jobtitle =  '${data.job}', dob = '${data.dob}', phone = '${data.phone}', addr = '${data.addr}', email = '${data.email}', sin = '${data.sin}' WHERE id = '${data.id}';`;
+        con.query(query, (err, result) => {
+            if(err){
+                console.log(err);
+                reject(err);
+            }
+            else{
+                resolve("Successfully updated staff");
+            }
+        })
+    })
 }
 
 async function deleteStaff(id){
@@ -65,8 +87,6 @@ async function deleteStaff(id){
                 resolve("Successfully deleted staff");
             }
         })
-
-
     })
 }
 
@@ -120,6 +140,14 @@ router.put("/moreInfo", (req, res) => {
     });
 })
 
-
+router.put("/updateInfo", (req, res) => {
+    updateStaff(req.body)
+        .then(() => {
+            res.send("Successfully updated staff");
+        })
+        .catch(() => {
+            console.log("Error: failed to update staff");
+        })
+})
 
 module.exports = router;
