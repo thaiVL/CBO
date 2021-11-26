@@ -23,48 +23,117 @@
             </div>
         </div>
 
-        <form id="addCustForm" action="/customer/addCustomer" method="POST"> 
-            <h2>Add new customer</h2>
+        <div class="container">
 
-            <br>
-            <label for="occ">Occupation</label>
-            <input id="occ" name="occ" type="text"><br>
+            <div class="alert alert-success alert-dismissible collapse" role="alert" id="deleteSuccess">
+                <strong>Successfully removed customer.</strong>
+                <button type="button" class="btn-close alertClose"></button>
+            </div>
 
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text"><br>
-            
-            <label for="dob">Date of Birth</label>
-            <input id="dob" name="dob" type="date"> <br>
+            <div class="table-responsive">
+                <div class="table-title" id="custTableTitle">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Customers</h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCust"><span class="fa fa-user-plus">Add Customer</span></button>
+                        </div>
+                    </div>
+                </div>
 
-            <label for="phonenum">Phone Number</label>
-            <input id="phonenum" name="phonenum" type="tel"><br>
+                <table class="table table-bordered table-hover" id="customerTable">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>Occupation</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="customerTableBody"></tbody>
+                </table>
+            </div>
+        </div>
 
-            <label for="addr">Address</label>
-            <input id="addr" name="addr" type="text"><br>
 
-            <label for="email">Email Address</label>
-            <input id="email" name="email" type="email"><br>
+        <div class="container">
+            <div class="modal fade" id="addCust">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add new customer</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
 
-            <label for="sin">SIN</label>
-            <input id="sin" name="sin" type="text"><br>
-            
-            <button type="submit" onclick="toggleForm(), addCustomer()">Submit</button>
-        </form>
+                            <form class="form-inline" action="/customer/addCustomer" method="POST">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="occ">Occupation</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="occ" name="occ" placeholder="Ex: Cook">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="name">Name</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="dob">Date of Birth</label>
+                                    <div class="col-md-10">
+                                        <input type="date" class="form-control" id="dob" name="dob">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="phonenum">Phone Number</label>
+                                    <div class="col-md-10">
+                                        <input type="tel" class="form-control" id="phonenum" name="phonenum" placeholder="Ex: 123 456 7890">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="addr">Address</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="addr" name="addr" placeholder="Ex: 123 Street">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="email">Email Address</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-2" for="sin">SIN</label>
+                                    <div class="col-md-10">
+                                        <input type="tel" class="form-control" id="sin" name="sin" placeholder="Ex: 098 123 456">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="addCustomer()" id="submitBtn">
+                                    Submit new customer</button>
 
-        
+                                <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
+                                    <strong>Missing required fields!</strong> You need to fill out all required fields below!
+                                    <button type="button" class="btn-close alertClose"></button>
+                                </div>
 
-        <table id="customerTable">
-            <thead>
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="customerTableBody">
+                                <div class="alert alert-danger alert-dismissible collapse" role="alert" id="numErr">
+                                    <strong>Field input error!</strong> Phone number and SIN can only be numbers!
+                                    <button type="button" class="btn-close alertClose"></button>
+                                </div>
 
-            </tbody>
-        </table>
+
+                                <div class="alert alert-success alert-dismissible collapse" role="alert" id="custSuccess">
+                                    <strong>Successfully added new customer!</strong>
+                                    <button type="button" class="btn-close alertClose"></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </body>
@@ -84,15 +153,10 @@
             $("#footer").load("footer.html");
         })
 
-        function toggleForm(){
-            var formState = document.getElementById("addCustForm").style.display;
-            if(formState == "block"){
-                document.getElementById("addCustForm").style.display = "none";
-            }
-            else{
-                document.getElementById("addCustForm").style.display = "block";
-            }
-        }
+        // Handles all button closing clicks
+        $('.alertClose').click(function(){
+            $(this).parent().hide("fade");
+        });
 
         function addCustomer(){
             var occ = document.getElementById("occ").value;
@@ -103,8 +167,11 @@
             var email = document.getElementById("email").value;
             var sin = document.getElementById("sin").value;
             if(occ.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
-            email.length == 0 || sin.length == 0){
-                alert("You must fill out all required fields!");
+                email.length == 0 || sin.length == 0){
+                $("#missingField").show("fade");
+                setTimeout(() => {
+                    $("#missingField").hide("fade");
+                },10000);
             }
             else{
                 setTimeout(() => {
@@ -114,6 +181,10 @@
                         if(http.readyState == 4 && http.status == 200){
                             var data = JSON.parse(http.response);
                             addrow(data[data.length-1]);
+                            $("#custSuccess").show("fade");
+                            setTimeout(() => {
+                                $("#custSuccess").hide("fade");
+                            }, 5000);
                         }
                     }
                     http.send();
@@ -129,6 +200,10 @@
                 if(http.readyState == 4 && http.status == 200){
                     document.getElementById('customerTableBody').innerHTML = '';
                     loadData(addrow);
+                    $("#deleteSuccess").show("fade");
+                    setTimeout(() => {
+                        $("#deleteSuccess").hide("fade");
+                    }, 5000);
                 }
             }
             http.send(`id=${id}`);
@@ -152,29 +227,159 @@
             var http = new XMLHttpRequest;
             http.open("PUT", "/customer/customerMore", true);
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
             http.onreadystatechange = function() {
-                window.location.replace("./customerMore.html");
+                if(http.readyState == 4 && http.status == 200){
+                    setTimeout(() => {
+                        var data = JSON.parse(http.response);
+                        document.getElementById(`more${id}`).innerHTML = `
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible collapse" role="alert" id="updateSuccess${id}">
+                                <strong>Successfully updated customer!</strong>
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="updateFailed${id}">
+                                <strong>Missing fields!</strong> Please make sure all fields are filled out!
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="col-9">
+                                <h3>Customer ID: ${id}</h3>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary" style="float: right;" onclick="update(${id})">
+                                    Save Edit<span class="fa fa-pencil"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="name${id}">Full Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="name${id}" name="name${id}" value="${data.name}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="occ${id}">Occupation</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="occ${id}" name="occ${id}" value="${data.occ}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="dob${id}">Date of Birth</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="dob${id}" name="dob${id}" value="${data.dob}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="phonenum${id}">Phone Number</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="phonenum${id}" name="phonenum${id}" value="${data.phone}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="addr${id}">Address</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="addr${id}" name="addr${id}" value="${data.addr}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="email${id}">Email</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="email${id}" name="email${id}" value="${data.email}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="sin${id}">SIN</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="sin${id}" name="sin${id}" value="${data.sin}">
+                            </div>
+                        </div> `;
+                    })
+                }
             }
-            http.send(`id=${id}`);
+            if(document.getElementById(`more${id}`).innerHTML === ""){
+                console.log("Requesting data from server...")
+                http.send(`id=${id}`);
+            }
+        }
+
+        function update(id){
+
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/customer/updateInfo", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    // console.log("Update work")
+                    $(`#updateSuccess${id}`).show();
+                    setTimeout(() => {
+                        $(`#updateSuccess${id}`).hide();
+                    }, 3000);
+                    document.getElementById(`nameC${id}`).innerHTML = document.getElementById(`name${id}`).value;
+                    document.getElementById(`occC${id}`).innerHTML = document.getElementById(`occ${id}`).value;
+                }
+                else{
+
+                }
+            }
+            var name = document.getElementById(`name${id}`).value;
+            var occ = document.getElementById(`occ${id}`).value;
+            var dob = document.getElementById(`dob${id}`).value;
+            var phone = document.getElementById(`phonenum${id}`).value;
+            var addr = document.getElementById(`addr${id}`).value;
+            var email = document.getElementById(`email${id}`).value;
+            var sin = document.getElementById(`sin${id}`).value;
+            if(occ.length == 0 || name.length == 0 || dob.length == 0 || phone.length == 0 || addr.length == 0 ||
+                email.length == 0 || sin.length == 0){
+                // console.log("update failed")
+                $(`#updateFailed${id}`).show();
+                setTimeout(() => {
+                    $(`#updateFailed${id}`).hide();
+                },3000);
+            }
+            else{
+                http.send(`id=${id}&name=${name}&occ=${occ}&dob=${dob}&phone=${phone}&addr=${addr}&email=${email}&sin=${sin}`);
+            }
+
 
         }
 
         function addrow(data){
             var table= document.getElementById("customerTableBody");
             var row = table.insertRow();
-            var customerid = row.insertCell(0);
+            var moreInfoRow = table.insertRow();
+            var custID = row.insertCell(0);
             var name = row.insertCell(1);
-            var action = row.insertCell(2);
-            
-            row.id = `row${data.id}`;
-            customerid.innerHTML = data.id;
-            customerid.id = `staffid${data.id}`;
-            name.innerHTML = data.name;
+            var occ = row.insertCell(2);
+            var action = row.insertCell(3);
 
-            var delButton = `<button id="deleteButton" onclick="deleteCustomer(${data.id})">Delete</button>`;
-            var moreInfo = `<button type="submit" id="moreButton" onclick="showMore(${data.id})">More Info</button>`
-            action.innerHTML = `${delButton} ${moreInfo}`;
-            
+            row.id = `row${data.id}`;
+            document.getElementById(`row${data.id}`).classList.add("text-center");
+            moreInfoRow.style = "background-color: #f2f2f2;"
+            custID.innerHTML = data.id;
+            custID.id = `custid${data.id}`;
+            name.innerHTML = data.name;
+            name.id = `nameC${data.id}`;
+            occ.innerHTML = data.occ;
+            occ.id = `occC${data.id}`;
+            action.innerHTML = `
+                <div class="btn-group" role="group">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed acrdBtn" type="button" data-bs-toggle="collapse" data-bs-target="#more${data.id}"
+                                    onclick="showMore(${data.id})">Show More</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary delBtn" onclick="deleteCustomer(${data.id})"><span class="fa fa-trash"></span></button>
+                </div>`;
+            moreInfoRow.innerHTML = `
+                <tr>
+                    <td class="hiddenRow" colspan="6">
+                        <div class="accordion-body collapse" id="more${data.id}"></div>
+                    </td>
+                </tr>`;
         }
 
 

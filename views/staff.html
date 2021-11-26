@@ -115,7 +115,7 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-md-2" for="sin">SIN</label>
                                 <div class="col-md-10">
-                                    <input type="tel" class="form-control" id="sin" name="sin" placeholder="Ex: 0987 1234 4567">
+                                    <input type="tel" class="form-control" id="sin" name="sin" placeholder="Ex: 098 123 456">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" onclick="addStaff()" id="submitBtn">
@@ -186,12 +186,6 @@
                     $("#missingField").hide("fade");
                 },10000);
             }
-            else if(!isNaN(phone) || isNaN(sin)){
-                $("#numErr").show("fade");
-                setTimeout(() => {
-                    $("#numErr").hide("fade");
-                },10000);
-            }
             else{
                 setTimeout(() => {
                     var http = new XMLHttpRequest;
@@ -231,7 +225,7 @@
 
         function showMore(id){
             var http = new XMLHttpRequest;
-            http.open("PUT", "/staff/moreInfo");
+            http.open("PUT", "/staff/moreInfo", true);
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
             http.onreadystatechange = function() {
@@ -241,7 +235,7 @@
                         document.getElementById(`more${id}`).innerHTML = `
                         <div class="row">
                             <div class="alert alert-success alert-dismissible collapse" role="alert" id="updateSuccess${id}">
-                                <strong>Successfully updated staff!</strong>
+                                <strong>Successfully updated customer!</strong>
                                 <button type="button" class="btn-close alertClose"></button>
                             </div>
                             <div class="alert alert-danger alert-dismissible collapse" role="alert" id="updateFailed${id}">

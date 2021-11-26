@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const cryptojs = require("crypto-js");
 
 const router = express.Router();
 
@@ -45,11 +46,22 @@ function isNumeric(val) {
 
 async function addNewStaff(data){
     return new Promise((resolve, reject) => {
-        if(!(isNumeric(data.sin) && isNumeric(data.phonenum))){
-            reject("Error: can only be numbers")
-        }
+        // if(!(isNumeric(data.sin) && isNumeric(data.phonenum))){
+        //     reject("Error: can only be numbers")
+        // }
+
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var jobtitleEC = cryptojs.AES.encrypt(data.jobTitle, `key`).toString();
+        var dobEC = cryptojs.AES.encrypt(data.dob, `key`).toString();
+        var phoneEC = cryptojs.AES.encrypt(data.phonenum, `key`).toString();
+        var addrEC = cryptojs.AES.encrypt(data.addr, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var sinEC = cryptojs.AES.encrypt(data.sin, `key`).toString();
+
+
         var query = `INSERT INTO staff (name, jobtitle, dob, phone, addr, email, sin)
-        VALUES ('${data.name}', '${data.jobTitle}', '${data.dob}','${data.phonenum}','${data.addr}','${data.email}','${data.sin}');`
+        VALUES ('${nameEC}', '${jobtitleEC}', '${dobEC}','${phoneEC}','${addrEC}','${emailEC}','${sinEC}');`
+
         con.query(query, (err, result) => {
             if(err){
                 reject(err);
@@ -63,10 +75,17 @@ async function addNewStaff(data){
 
 async function updateStaff(data){
     return new Promise((resolve, reject) => {
-        var query = `UPDATE staff SET name = '${data.name}', jobtitle =  '${data.job}', dob = '${data.dob}', phone = '${data.phone}', addr = '${data.addr}', email = '${data.email}', sin = '${data.sin}' WHERE id = '${data.id}';`;
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var jobtitleEC = cryptojs.AES.encrypt(data.job, `key`).toString();
+        var dobEC = cryptojs.AES.encrypt(data.dob, `key`).toString();
+        var phoneEC = cryptojs.AES.encrypt(data.phone, `key`).toString();
+        var addrEC = cryptojs.AES.encrypt(data.addr, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var sinEC = cryptojs.AES.encrypt(data.sin, `key`).toString();
+
+        var query = `UPDATE staff SET name = '${nameEC}', jobtitle =  '${jobtitleEC}', dob = '${dobEC}', phone = '${phoneEC}', addr = '${addrEC}', email = '${emailEC}', sin = '${sinEC}' WHERE id = '${data.id}';`;
         con.query(query, (err, result) => {
             if(err){
-                console.log(err);
                 reject(err);
             }
             else{
@@ -108,6 +127,15 @@ router.get("/loadstaff", (req, res) => {
             throw (err);
         }
         else{
+            for(var i=0; i<result.length; i+=1){
+                    result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].jobtitle = (cryptojs.AES.decrypt(result[i].jobtitle, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].dob = (cryptojs.AES.decrypt(result[i].dob, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].phone = (cryptojs.AES.decrypt(result[i].phone, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].addr = (cryptojs.AES.decrypt(result[i].addr, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].sin = (cryptojs.AES.decrypt(result[i].sin, `key`)).toString(cryptojs.enc.Utf8);
+            }
             res.send(result);
         }
     });
@@ -132,6 +160,13 @@ router.put("/moreInfo", (req, res) => {
         else{
             for(var i=0; i<result.length; i+=1){
                 if(result[i].id == req.body.id){
+                    result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].jobtitle = (cryptojs.AES.decrypt(result[i].jobtitle, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].dob = (cryptojs.AES.decrypt(result[i].dob, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].phone = (cryptojs.AES.decrypt(result[i].phone, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].addr = (cryptojs.AES.decrypt(result[i].addr, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].sin = (cryptojs.AES.decrypt(result[i].sin, `key`)).toString(cryptojs.enc.Utf8);
                     res.send(result[i]);
                     return;
                 }   

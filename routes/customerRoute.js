@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const cryptojs = require("crypto-js");
 
 const router = express.Router();
 
@@ -41,9 +42,30 @@ router.get("/endCon",(req, res)=>{
 
 
 
+async function updateCustomer(data){
+    return new Promise((resolve, reject) => {
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var occEC = cryptojs.AES.encrypt(data.occ, `key`).toString();
+        var dobEC = cryptojs.AES.encrypt(data.dob, `key`).toString();
+        var phoneEC = cryptojs.AES.encrypt(data.phone, `key`).toString();
+        var addrEC = cryptojs.AES.encrypt(data.addr, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var sinEC = cryptojs.AES.encrypt(data.sin, `key`).toString();
+
+        // var query = `UPDATE customer SET name = '${nameEC}', occ =  '${occEC}', dob = '${dobEC}', phone = '${phoneEC}', addr = '${addrEC}', email = '${emailEC}', sin = '${sinEC}' WHERE id = '${data.id}';`;
+        var query = `UPDATE customer SET name = '${data.name}', occ =  '${data.occ}', dob = '${data.dob}', phone = '${data.phone}', addr = '${data.addr}', email = '${data.email}', sin = '${data.sin}' WHERE id = '${data.id}';`;
+        con.query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve("Successfully updated customer");
+            }
+        })
+    })
+}
 
 
-var customerID = null;
 async function addNewCustomer(data){
     return new Promise((resolve, reject) => {
         var query = `INSERT INTO customer (name, occ, dob, phone, addr, email, sin) 
@@ -77,6 +99,15 @@ async function deleteCustomer(id){
     })
 }
 
+router.put("/updateInfo", (req, res) => {
+    updateCustomer(req.body)
+        .then(() => {
+            res.send("Successfully updated customer");
+        })
+        .catch(() => {
+            console.log("Error: failed to update customer");
+        })
+})
 
 router.get("/loadCustomer", (req, res) => {
     var query = `SELECT * FROM customer`
@@ -113,18 +144,6 @@ router.delete("/deleteCustomer", (req, res) => {
     })
 })
 
-
-router.put("/customerMore", (req, res) => {
-    customerID = req.body.id
-    
-    res.sendFile(path.join(__dirname, "../views/customerMore.html"));
-})
-
-
-//////////////////
-// CUSTOMERMORE //
-//////////////////
-
 async function saveReport(data, id){
     return new Promise((resolve, reject) => {
         var query = `UPDATE customer SET report = '${data}' WHERE id=${id};`;
@@ -140,7 +159,7 @@ async function saveReport(data, id){
     })
 }
 
-router.get("/customerMore", (req, res) => {
+router.put("/customerMore", (req, res) => {
     var query = `SELECT * FROM customer`
     con.query(query, (err, result) => {
         if(err){
@@ -148,15 +167,13 @@ router.get("/customerMore", (req, res) => {
         }
         else{
             for(var i=0; i<result.length; i+=1){
-                if(result[i].id == customerID){
+                if(result[i].id == req.body.id){
                     res.send(result[i]);
                     return;
                 }   
             }
         }
     });
-    // console.log(customerID);
-    // send all database info back to html for rendering
 });
 
 router.put("/saveReport", (req, res) => {

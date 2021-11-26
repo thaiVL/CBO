@@ -4,3 +4,44 @@
     background-color: #cee2de;
     /*border-bottom: 2px ridge;*/
 }
+
+.table-title{
+    background-color: #378de8;
+    padding: 10px 20px 10px 20px;
+    border-radius: 3px 3px 0 0;
+}
+
+.table-title h2{
+    color: white;
+}
+
+.table-title .btn{
+    margin-top: 5px;
+    float:right;
+}
+
+.table-title .btn:hover{
+    border: none;
+    outline: none;
+    color: white;
+    background: #4cea30;
+}
+
+/*table.table-striped tbody tr:nth-of-type(odd){*/
+/*  background-color: #fcfcfc;*/
+/*}*/
+
+table.table-hover tbody tr:hover{
+    background: #fadf9b;
+}
+
+
+.hiddenRow{
+    padding: 0 !important;
+}
+
+.acrdBtn{
+    height: 35px;
+}
+.showMore{
+}
