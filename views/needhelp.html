@@ -1,67 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+        <link rel="stylesheet" href="./css/help.css">
+    </head>
+
     <div id="header"></div>
 
 
     <body>
-        <br>
-        <h1>Don't be afraid to ask for help!</h1>
-        <p>If you or someone you know who is at risk of being homeless or hunger, please contact us and ask for help!
-            We are always happy to help anyone who needs it. We are a judgement-free organization and always work our hardest
-            to strive to provide the best help. It's in our goals and values to provide the best help and opportunities we can.
-            
-        </p>
 
-        <h1>Our services</h1>
-        <h3>We offer a wide array of services, including:</h3>
-        <ul>
-            <li>Shelter</li>
-            <ul>
-                We are able to provide temporary shelters at some of our locations.<br>
-                123 Confed Street<br>
-                409 Street West<br>
-                1023 Downtown District<br>
-                104 Somewhere Close<br>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row row-header">
+                    <div class="col-12 col-sm-6">
+                        <h1>Do you or someone you know need help urgently?</h1>
+                        <p>Please see below for details to contact us as well as services we are able to provide to you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            </ul>
-            <li>Food</li>
-            <li>Clothing</li>
-            <li>Education</li>
-            <li>Employment opportunities</li>    
-        </ul>
+        <div class="container">
+            <div class="row row-content section">
+                <div class="col-6">
+                    <h1>Don't be afraid to ask for help!</h1>
+                    <p>If you or someone you know who is at risk of being homeless or hunger, please contact us and ask for help!
+                        We are always happy to help anyone who needs it. We are a judgement-free organization and always work our hardest
+                        to strive to provide the best help. It's in our goals and values to provide the best help and opportunities we can.
 
-        <h1>Our hotline</h1>
+                    </p>
+                </div>
+                <div class="col-4 align-self-center offset-1">
+                    <div class="row row-content">
+                        <div class="col-8">
+                            <h4>If you need urgent help, please don't hesitate to call us</h4>
+                            <a class="btn btn-success btn-lg" role="btn" href="tel:306-444-4444"><span class="fa fa-phone"></span>306 444 4444</a>
+                        </div>
+    <!--                    <div class="col-4">-->
+    <!--                        <img src="./img/phoneworker.png" class="fluid-img rounded border" style="height: 400px; width:auto">-->
+    <!--                    </div>-->
 
-        <form action="/inquiry/addInquiry" method="POST">
-            <label for="name"><b>Name</b></label><br>
-            <input type="text" id="name" name="name" placeholder="John Doe"><br><br>
+                    </div>
+                </div>
+            </div>
 
-            <label for="email"><b>Email Address</b></label><br>
-            <input type="email" id="email" name="email" placeholder="johndoe123@mail.com"><br><br>
+            <div class="row row-content section">
+                <div class="row">
+                    <div class="col">
+                        <h1>Our Services</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Shelter</strong>
+                                <p class="parabody">We are able to provide those in need with temporary shelters at some of our locations.
+                                Just come on in and talk to one of our staff members or volunteers</p>
+                                <ul>
+                                    <li>123 Confederation Street</li>
+                                    <li>409 Street East</li>
+                                    <li>411 Downtown Area</li>
+                                    <li>109 Business District</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <strong>Food</strong>
+                                <p class="parabody">Everyone deserves to be able to access basic needs such as food and water. As such, we are able
+                                to provide those in need with food and water at some of our locations as listed in the shelter
+                                section. Please come by and talk with our staff members or volunteers. If you are unable to
+                                come to our location, please send us an inquiry or call us.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Clothing</strong>
+                                <p class="parabody">Every year, we collect donated clothing from generous people of the community and gift it to
+                                those who are unable to afford adequate clothing. Come by to one of our locations and talk
+                                with a staff member who can take your measurements and arrange the correct clothing. Please
+                                understand that there is a limit on our resources, so we are able to only provide at most 2
+                                sets of clothing per person.</p>
+                            </div>
+                            <div class="col-6">
+                                <strong>Education</strong>
+                                <p class="parabody">We believe education should be a basic right for all. As such, we will try to provide
+                                those who wants to pursue an education with adequate or cover most of their tuition.
+                                Please send an inquiry regarding this program so that we may contact you and see if you
+                                are eligible to participate in this program.</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <strong>Employment opportunities</strong>
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <p class="parabody">We do our best to provide internal employment opportunities to those who are struggling to
+                                obtain employment elsewhere. We do this to provide experience and qualifications as well as
+                                helping them build connections. If we are not able to offer internal employment, we will try
+                                to find external employment opportunities for candidates to apply to.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <label for="subject"><b>Subject</b></label><br>
-            <input type="text" id="subject" name="subject" placeholder="Inquiry Subject Header"><br><br>
 
-            <label for="data"><b>Your Inquiry</b></label><br>
-            <textarea id="data" name="data" rows=20 cols=50></textarea><br>
+            <h1>Send us a question or concern!</h1>
+            <form class="form-inline" action="/inquiry/addInquiry" method="POST">
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="name">Name</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="email">Email Address</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="subj">Subject</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="subj" name="subj" placeholder="Ex: At risk of homelessness">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="inq">Inquiry</label>
+                    <div class="col-12">
+                        <textarea rows="10" class="form-control" id="inq" name="inq" placeholder="Write your inquiry here"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="addInquiry()" id="submitBtn">
+                    Submit new inquiry</button>
 
-            <button type="submit" onclick="userConfirmation()">Submit my inquiry</button>
-        </form>
+                <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
+                    <strong>Missing required fields!</strong> You need to fill out all required fields below!
+                    <button type="button" class="btn-close alertClose"></button>
+                </div>
+
+
+                <div class="alert alert-success alert-dismissible collapse" role="alert" id="inqSuccess">
+                    <strong>Successfully sent an inquiry!</strong>
+                    <button type="button" class="btn-close alertClose"></button>
+                </div>
+
+            </form>
+
+        </div>
     </body>
 
     
-    <footer>
-        <hr id="footerLineSep">
-        <div class="space">
-            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
-            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
-            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
-            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
-            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
-        </div>
-    </footer>
-
+    <div id="footer"></div>
 
 
 </html>
@@ -74,8 +171,34 @@
 <script>
     $(() => {
         $("#header").load("header.html");
+        $("#footer").load("footer.html");
     })
-    function userConfirmation(){
-        alert("Thank you for submitting your inquiry!\n It will take us approximately 3 business days to contact you. If it is urgent, please call our phone number: 306-123-4567")
+
+    function addInquiry(){
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var subj = document.getElementById("subj").value;
+        var inq = document.getElementById("inq").value;
+        if(subj.length == 0 || name.length == 0 || inq.length == 0 || email.length == 0){
+            $("#missingField").show("fade");
+            setTimeout(() => {
+                $("#missingField").hide("fade");
+            },10000);
+        }
+        else{
+            setTimeout(() => {
+                var http = new XMLHttpRequest;
+                http.open("GET", "/inquiry/loadInquiries", true);
+                http.onreadystatechange = function() {
+                    if(http.readyState == 4 && http.status == 200){
+                        $("#inqSuccess").show("fade");
+                        setTimeout(() => {
+                            $("#inqSuccess").hide("fade");
+                        }, 5000);
+                    }
+                }
+                http.send();
+            },500);
+        }
     }
 </script>

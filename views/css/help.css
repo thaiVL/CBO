@@ -1,0 +1,17 @@
+.jumbotron{
+    padding-top: 100px;
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+    background-color: #cee2de;
+    /*border-bottom: 2px ridge;*/
+}
+.section{
+    margin-top: -20px;
+    margin-bottom: 50px;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 3px ridge;
+    min-height: 400px;
+}
+.parabody{
+    font-size: 17px;
+}

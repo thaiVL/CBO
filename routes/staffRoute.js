@@ -46,9 +46,10 @@ function isNumeric(val) {
 
 async function addNewStaff(data){
     return new Promise((resolve, reject) => {
-        // if(!(isNumeric(data.sin) && isNumeric(data.phonenum))){
-        //     reject("Error: can only be numbers")
-        // }
+        if(data.name === "" || data.jobTitle === "" || data.dob === "" || data.phonenum === "" || data.addr === "" || data.email === "" || data.sin === ""){
+            reject("Failed to insert new staff into db: empty fields detected");
+            return;
+        }
 
         var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
         var jobtitleEC = cryptojs.AES.encrypt(data.jobTitle, `key`).toString();

@@ -1,27 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+        <link rel="stylesheet" href="./css/tableStyle.css">
+    </head>
+
     <div id="header"></div>
 
 
     <body onload="load(addrow)">
-        <button><a href="./dashboard.html">Back to Dashboard</a></button>
-        <h1>Customer Inquiries</h1>
-        <table id="inquiryTable">
-            <thead>
-                <tr>
-                    <th>Inquiry ID</th>
-                    <th>Subject</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="inquiryTableBody">
 
-            </tbody>
-        </table>
+        <div class="jumbotron border rounded">
+            <div class="container">
+                <div class="row row-header">
+                    <div class="col-12 col-sm-6">
+                        <h1>Inquiries Management</h1>
+                        <p>Administration settings. Add or delete inquiry information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="alert alert-success alert-dismissible collapse" role="alert" id="deleteSuccess">
+                <strong>Successfully removed inquiry.</strong>
+                <button type="button" class="btn-close alertClose"></button>
+            </div>
+
+            <div class="table-responsive">
+                <div class="table-title" id="inquiryTableTitle">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Inquiries</h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addInq"><span class="fa fa-inbox">New Inquiry</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover" id="inquiryTable">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Inquiry ID</th>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="inquiryTableBody"></tbody>
+                </table>
+            </div>
+        </div>
     </body>
 
+    <div class="container">
+        <div class="modal fade" id="addInq">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Add new inquiry</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
 
+                        <form class="form-inline" action="/inquiry/addInquiry" method="POST">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="name">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="email">Email Address</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="subj">Subject</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="subj" name="subj" placeholder="Ex: At risk of homelessness">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2" for="inq">Inquiry</label>
+                                <div class="col-md-10">
+                                    <textarea rows="10" class="form-control" id="inq" name="inq" placeholder="Write about inquiry's inquiry here"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="addInquiry()" id="submitBtn">
+                                Submit new inquiry</button>
+
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
+                                <strong>Missing required fields!</strong> You need to fill out all required fields below!
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible collapse" role="alert" id="inqSuccess">
+                                <strong>Successfully added new inquiry!</strong>
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -32,9 +124,38 @@
     <script>
         $(() => {
             $("#header").load("header.html");
+            $("#footer").load("footer.html");
         })
 
-        document.createElement("a");
+        function addInquiry(){
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var subj = document.getElementById("subj").value;
+            var inq = document.getElementById("inq").value;
+            if(subj.length == 0 || name.length == 0 || inq.length == 0 || email.length == 0){
+                $("#missingField").show("fade");
+                setTimeout(() => {
+                    $("#missingField").hide("fade");
+                },10000);
+            }
+            else{
+                setTimeout(() => {
+                    var http = new XMLHttpRequest;
+                    http.open("GET", "/inquiry/loadInquiries", true);
+                    http.onreadystatechange = function() {
+                        if(http.readyState == 4 && http.status == 200){
+                            var data = JSON.parse(http.response);
+                            addrow(data[data.length-1]);
+                            $("#inqSuccess").show("fade");
+                            setTimeout(() => {
+                                $("#inqSuccess").hide("fade");
+                            }, 5000);
+                        }
+                    }
+                    http.send();
+                },500);
+            }
+        }
 
         function load(callback){
             var http = new XMLHttpRequest;
@@ -57,39 +178,151 @@
             http.onreadystatechange = function() {
                 if(http.readyState == 4 && http.status == 200){
                     document.getElementById('inquiryTableBody').innerHTML = '';
-                    loadData(addrow);
+                    load(addrow);
+                    $("#deleteSuccess").show("fade");
+                    setTimeout(() => {
+                        $("#deleteSuccess").hide("fade");
+                    }, 5000);
                 }
             }
             http.send(`id=${id}`);
+        }
+
+        function update(id){
+
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/inquiry/updateInfo", true);
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    $(`#updateSuccess${id}`).show();
+                    setTimeout(() => {
+                        $(`#updateSuccess${id}`).hide();
+                    }, 3000);
+                    document.getElementById(`nameC${id}`).innerHTML = document.getElementById(`name${id}`).value;
+                    document.getElementById(`subjC${id}`).innerHTML = document.getElementById(`subj${id}`).value;
+                }
+                else{
+                }
+            }
+            var name = document.getElementById(`name${id}`).value;
+            var email = document.getElementById(`email${id}`).value;
+            var subj = document.getElementById(`subj${id}`).value;
+            var inq = document.getElementById(`inq${id}`).value;
+            if(name.length == 0 || subj.length == 0 || email.length == 0 || inq.length == 0){
+                // console.log("update failed")
+                $(`#updateFailed${id}`).show();
+                setTimeout(() => {
+                    $(`#updateFailed${id}`).hide();
+                },3000);
+            }
+            else{
+                http.send(`id=${id}&name=${name}&subj=${subj}&email=${email}&inq=${inq}`);
+            }
+
+
         }
 
         function viewMore(id){
             var http = new XMLHttpRequest;
             http.open("PUT", "/inquiry/inquiryView", true);
             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            http.onreadystatechange = function() {
-                window.location.replace("./inquiryDetails.html");
-            }
-            http.send(`id=${id}`);
 
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    setTimeout(() => {
+                        var data = JSON.parse(http.response);
+                        document.getElementById(`more${id}`).innerHTML = `
+                        <div class="row">
+                            <div class="alert alert-success alert-dismissible collapse" role="alert" id="updateSuccess${id}">
+                                <strong>Successfully updated inquiry!</strong>
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible collapse" role="alert" id="updateFailed${id}">
+                                <strong>Missing fields!</strong> Please make sure all fields are filled out!
+                                <button type="button" class="btn-close alertClose"></button>
+                            </div>
+                            <div class="col-9">
+                                <h3>Inquiry ID: ${id}</h3>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-primary" style="float: right;" onclick="update(${id})">
+                                    Save Edit<span class="fa fa-pencil"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="name${id}">Full Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="name${id}" name="name${id}" value="${data.name}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="email${id}">Email</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="email${id}" name="email${id}" value="${data.email}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="subj${id}">Subject</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="subj${id}" name="subj${id}" value="${data.subject}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label col-md-2" for="inq${id}">Inquiry</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" rows="10" name="inq${id}" id="inq${id}" placeholder="Write inquiry"></textarea>
+                            </div>
+                        </div>`;
+                        document.getElementById(`inq${id}`).value = data.data;
+                    })
+                }
+            }
+            if(document.getElementById(`more${id}`).innerHTML === ""){
+                console.log("Requesting data from server...")
+                http.send(`id=${id}`);
+            }
         }
 
         function addrow(data){
             var table= document.getElementById("inquiryTableBody");
             var row = table.insertRow();
-            var inquiryid = row.insertCell(0);
-            var subject = row.insertCell(1);
-            var action = row.insertCell(2);
-            
-            row.id = `row${data.id}`;
-            inquiryid.innerHTML = data.id;
-            inquiryid.id = `staffid${data.id}`;
-            subject.innerHTML = data.subject;
+            var moreInfoRow = table.insertRow();
+            var inquiryID = row.insertCell(0);
+            var name = row.insertCell(1);
+            var subj = row.insertCell(2);
+            var action = row.insertCell(3);
 
-            var delButton = `<button id="deleteButton" onclick="deleteInquiry(${data.id})">Delete</button>`;
-            var view = `<button type="submit" id="viewButton" onclick="viewMore(${data.id})">View</button>`
-            action.innerHTML = `${delButton} ${view}`;
-            
+            row.id = `row${data.id}`;
+            document.getElementById(`row${data.id}`).classList.add("text-center");
+            moreInfoRow.style = "background-color: #f2f2f2;"
+            inquiryID.innerHTML = data.id;
+            inquiryID.id = `inquiryid${data.id}`;
+            name.innerHTML = data.name;
+            name.id = `nameC${data.id}`;
+            subj.innerHTML = data.subject;
+            subj.id = `subjC${data.id}`;
+            action.innerHTML = `
+                <div class="btn-group" role="group">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header">
+                                <button class="accordion-button collapsed acrdBtn" type="button" data-bs-toggle="collapse" data-bs-target="#more${data.id}"
+                                    onclick="viewMore(${data.id})">View Inquiry</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary delBtn" onclick="deleteInquiry(${data.id})"><span class="fa fa-trash"></span></button>
+                </div>`;
+            moreInfoRow.innerHTML = `
+                <tr>
+                    <td class="hiddenRow" colspan="6">
+                        <div class="accordion-body collapse" id="more${data.id}"></div>
+                    </td>
+                </tr>`;
+
         }
 
     </script>

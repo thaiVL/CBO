@@ -51,9 +51,9 @@ async function updateCustomer(data){
         var addrEC = cryptojs.AES.encrypt(data.addr, `key`).toString();
         var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
         var sinEC = cryptojs.AES.encrypt(data.sin, `key`).toString();
+        var reportEC = cryptojs.AES.encrypt(data.report, `key`).toString();
 
-        // var query = `UPDATE customer SET name = '${nameEC}', occ =  '${occEC}', dob = '${dobEC}', phone = '${phoneEC}', addr = '${addrEC}', email = '${emailEC}', sin = '${sinEC}' WHERE id = '${data.id}';`;
-        var query = `UPDATE customer SET name = '${data.name}', occ =  '${data.occ}', dob = '${data.dob}', phone = '${data.phone}', addr = '${data.addr}', email = '${data.email}', sin = '${data.sin}' WHERE id = '${data.id}';`;
+        var query = `UPDATE customer SET name = '${nameEC}', occ =  '${occEC}', dob = '${dobEC}', phone = '${phoneEC}', addr = '${addrEC}', email = '${emailEC}', sin = '${sinEC}', report = '${reportEC}' WHERE id = '${data.id}';`;
         con.query(query, (err, result) => {
             if(err){
                 reject(err);
@@ -68,11 +68,24 @@ async function updateCustomer(data){
 
 async function addNewCustomer(data){
     return new Promise((resolve, reject) => {
-        var query = `INSERT INTO customer (name, occ, dob, phone, addr, email, sin) 
-        VALUES ('${data.name}', '${data.occ}', '${data.dob}','${data.phonenum}','${data.addr}','${data.email}','${data.sin}');`
+        if(data.name === "" || data.occ === "" || data.dob === "" || data.phonenum === "" || data.addr === "" || data.email === "" || data.sin === ""){
+            reject("Failed to insert new customer into db: empty fields detected");
+            return;
+        }
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var occEC = cryptojs.AES.encrypt(data.occ, `key`).toString();
+        var dobEC = cryptojs.AES.encrypt(data.dob, `key`).toString();
+        var phoneEC = cryptojs.AES.encrypt(data.phonenum, `key`).toString();
+        var addrEC = cryptojs.AES.encrypt(data.addr, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var sinEC = cryptojs.AES.encrypt(data.sin, `key`).toString();
+
+
+        var query = `INSERT INTO customer (name, occ, dob, phone, addr, email, sin)
+        VALUES ('${nameEC}', '${occEC}', '${dobEC}','${phoneEC}','${addrEC}','${emailEC}','${sinEC}');`
+
         con.query(query, (err, result) => {
             if(err){
-                // console.log(err);
                 reject(err);
             }
             else{
@@ -116,6 +129,16 @@ router.get("/loadCustomer", (req, res) => {
             throw (err);
         }
         else{
+            for(var i=0; i<result.length; i+=1){
+                result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].occ = (cryptojs.AES.decrypt(result[i].occ, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].dob = (cryptojs.AES.decrypt(result[i].dob, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].phone = (cryptojs.AES.decrypt(result[i].phone, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].addr = (cryptojs.AES.decrypt(result[i].addr, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].sin = (cryptojs.AES.decrypt(result[i].sin, `key`)).toString(cryptojs.enc.Utf8);
+            }
+            // console.log(result)
             res.send(result);
         }
     });
@@ -144,21 +167,6 @@ router.delete("/deleteCustomer", (req, res) => {
     })
 })
 
-async function saveReport(data, id){
-    return new Promise((resolve, reject) => {
-        var query = `UPDATE customer SET report = '${data}' WHERE id=${id};`;
-        con.query(query, (err, result) => {
-            if(err){
-                console.log(err);
-                reject(err);
-            }
-            else{
-                resolve("Successfully save customer report to customer database");
-            }
-        })
-    })
-}
-
 router.put("/customerMore", (req, res) => {
     var query = `SELECT * FROM customer`
     con.query(query, (err, result) => {
@@ -168,6 +176,16 @@ router.put("/customerMore", (req, res) => {
         else{
             for(var i=0; i<result.length; i+=1){
                 if(result[i].id == req.body.id){
+                    result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].occ = (cryptojs.AES.decrypt(result[i].occ, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].dob = (cryptojs.AES.decrypt(result[i].dob, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].phone = (cryptojs.AES.decrypt(result[i].phone, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].addr = (cryptojs.AES.decrypt(result[i].addr, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].sin = (cryptojs.AES.decrypt(result[i].sin, `key`)).toString(cryptojs.enc.Utf8);
+                    if(result[i].report != null){
+                        result[i].report = (cryptojs.AES.decrypt(result[i].report, `key`)).toString(cryptojs.enc.Utf8);
+                    }
                     res.send(result[i]);
                     return;
                 }   
@@ -175,17 +193,6 @@ router.put("/customerMore", (req, res) => {
         }
     });
 });
-
-router.put("/saveReport", (req, res) => {
-    saveReport(req.body.data, req.body.id)
-    .then(() => {
-        res.send("Successfully saved report to customer base");
-    })
-    .catch(() => {
-        console.log("Error: failed to save report to customer base");
-    })
-})
-
 
 
 

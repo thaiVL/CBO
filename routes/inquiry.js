@@ -2,6 +2,7 @@
 
 const express = require("express");
 const path = require("path");
+const cryptojs = require("crypto-js");
 
 const router = express.Router();
 
@@ -27,16 +28,23 @@ con.connect((err) =>{
     }
 });
 
-
-var inquiryID = null;
-
 async function addInquiry(data){
     return new Promise((resolve, reject) => {
+        if(data.name === "" || data.email === "" || data.subj === "" || data.inq === ""){
+            reject("Required field(s) are empty! Failed to add inquiry to db");
+            return;
+        }
+
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var subjEC = cryptojs.AES.encrypt(data.subj, `key`).toString();
+        var inqEC = cryptojs.AES.encrypt(data.inq, `key`).toString();
+
         var query = `INSERT INTO inquiry (name, email, subject, data) 
-        VALUES ('${data.name}', '${data.email}', '${data.subject}','${data.data}');`
+        VALUES ('${nameEC}', '${emailEC}', '${subjEC}','${inqEC}');`
         con.query(query, (err, result) => {
             if(err){
-                // console.log(err);
+                console.log(err);
                 reject(err);
             }
             else{
@@ -62,6 +70,26 @@ async function deleteInquiry(id){
     })
 }
 
+async function updateInquiry(data){
+    return new Promise((resolve, reject) => {
+        var nameEC = cryptojs.AES.encrypt(data.name, `key`).toString();
+        var emailEC = cryptojs.AES.encrypt(data.email, `key`).toString();
+        var subjEC = cryptojs.AES.encrypt(data.subj, `key`).toString();
+        var inqEC = cryptojs.AES.encrypt(data.inq, `key`).toString();
+
+        ////// FINISH THIS //////////////
+        var query = `UPDATE inquiry SET name = '${nameEC}', subject = '${subjEC}', email = '${emailEC}', data = '${inqEC}' WHERE id = '${data.id}';`;
+        con.query(query, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve("Successfully updated customer");
+            }
+        })
+    })
+}
+
 router.get("/loadInquiries", (req, res) => {
     var query = `SELECT * FROM inquiry`
     con.query(query, (err, result) => {
@@ -69,6 +97,12 @@ router.get("/loadInquiries", (req, res) => {
             throw err;
         }
         else{
+            for(var i=0; i<result.length; i+=1){
+                result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].subject = (cryptojs.AES.decrypt(result[i].subject, `key`)).toString(cryptojs.enc.Utf8);
+                result[i].data = (cryptojs.AES.decrypt(result[i].data, `key`)).toString(cryptojs.enc.Utf8);
+            }
             res.send(result);
         }
     });
@@ -99,11 +133,6 @@ router.post("/addInquiry", (req, res) => {
 
 
 router.put("/inquiryView", (req, res) => {
-    inquiryID = req.body.id
-    res.sendFile(path.join(__dirname, "../views/inquiryDetails.html"));
-})
-
-router.get("/inquiryDetails", (req, res) => {
     var query = `SELECT * FROM inquiry`
     con.query(query, (err, result) => {
         if(err){
@@ -111,13 +140,28 @@ router.get("/inquiryDetails", (req, res) => {
         }
         else{
             for(var i=0; i<result.length; i+=1){
-                if(result[i].id == inquiryID){
+                if(result[i].id == req.body.id){
+                    result[i].name = (cryptojs.AES.decrypt(result[i].name, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].email = (cryptojs.AES.decrypt(result[i].email, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].subject = (cryptojs.AES.decrypt(result[i].subject, `key`)).toString(cryptojs.enc.Utf8);
+                    result[i].data = (cryptojs.AES.decrypt(result[i].data, `key`)).toString(cryptojs.enc.Utf8);
                     res.send(result[i]);
                     return;
-                }   
+                }
             }
         }
     });
-});
+})
+
+router.put("/updateInfo", (req, res) => {
+    updateInquiry(req.body)
+        .then(() => {
+            res.send("Successfully updated customer");
+        })
+        .catch(() => {
+            console.log("Error: failed to update customer");
+        })
+})
+
 
 module.exports = router;
