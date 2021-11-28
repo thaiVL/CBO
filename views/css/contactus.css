@@ -3,3 +3,15 @@
     margin-left: 200px;
     margin-right: 400px;
 }
+
+.section{
+    margin-bottom: 70px;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 3px ridge;
+    min-height: 400px;
+    margin-top: -70px;
+}
+
+.parabody{
+    font-size: 17px;
+}

@@ -1,143 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Org name here</title>
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
         <link rel="stylesheet" href="./css/contactus.css">
-        <link rel="stylesheet" href="./css/header.css">
-        <link rel="stylesheet" href="./css/footer.css">
     </head>
 
-    <header>
-        <button class="headerButtons">
-            <a id="login">Log in</a>
-        </button>
-        <button class="headerButtons">
-            <a id="dashboard" href="./dashboard.html">Dashboard</a>
-        </button>
-        <button>
-            <a id="homeL" href="./index.html">Home</a>
-        </button>
-        <br>
-        <hr id="headerLineSep">
-        <div class="headerButtons">
-            <button>
-                <a id="needhelp" href="./needhelp.html">Need help?</a>
-            </button>
-            <button>
-                <a id="contactus" href="./contactus.html">Contact us</a>
-            </button>
-            <button>
-                <a id="aboutus" href="./aboutus.html">About us</a>
-            </button>
-            <button>
-                <a id="getinvolved" href="./getinvolved.html">Get involved</a>
-            </button>
-            
-            <button class="">
-                <a id="donate" href="./donate.html">Donate</a>
-            </button>
-        </div>
-    </header>
+    <div id="header"></div>
 
 
     <body>
-        <div class="pad">
-            <h1>Have Questions? Here are some FAQs</h1>
-            <ul>
-                <li><b>What exactly is homelessness??</b>
-                    <ul>
-                        <li>Homelessness describes the situation of an individual or family without stable, permanent, 
-                            appropriate housing, or the immediate prospect, means and ability of acquiring it</li>
-                    </ul>
-                </li>
-                <li><b>What causes a person to become homeless??</b>
-                <ul>
-                    <li>There are many many many factors that causes a person to become homeless. Some prominent ones are
-                        debt, job loss leading to permanent unemployment, mental or physical health problems and
-                        severe trauma. If you know anyone who is experience these things, please reach out and help them!
-                    </li>
-                </ul>
-            </li>
-                <li><b>I really want to help, how can I help??</b>
-                    <ul>
-                        <li>Well, I'm glad you asked! You can help us by taking a looking at
-                            our <a href="donate.html">donate page</a>! 
-                        </li>
-                    </ul>
-                </li>
-                <li><b>I'm with a news organization, may I interview you?</b>
-                    <ul>
-                        <li>Of course! We'd love to help spread awareness about the problem
-                            that we are tackling! Please just contact us by submitting a form
-                            below with the appropriate subject heading!
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <b>How do you collect data on homelessness?</b>
-                    <ul>
-                        <li>Well, there are several ways we do this: we often get help from a
-                            researcher who specializes in sociology and they conduct the data
-                            collection for us. We also register all persons who we help so that
-                            we know who they are in the future so everything can go smoothly 
-                            for their next visit!
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <b>I tried to access a link on this website, but it's broken!</b>
-                    <ul>
-                        <li>We apologize for any broken links, please report them to <a href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <b>Can I share information that I have obtained from this website?</b>
-                    <ul>
-                        <li>Of course! We just ask that you do not commercialize any information that
-                            you may find on this website as it will infringe on our copyrights!
-                        </li>
-                    </ul>
-                </li>            
-            </ul>
 
-            <h1>Do you still have questions?</h1>
-            <p>Just email us at  Just email us at <a href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a> or call us at 306-123-4567</p>
-            <p>Or you can also send us an inquiry! Just fill out the form below</p>
-            <form action="/inquiry/addInquiry" method="POST">
-                <label for="name"><b>Name</b></label><br>
-                <input type="text" id="name" name="name" placeholder="John Doe"><br><br>
+        <div class="container">
+            <div class="row row-content section parabody" style="margin-top: 70px;">
+                <div class="row">
+                    <h1>Have Questions? Here are some FAQs</h1>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                        <li><strong>What exactly is homelessness??</strong></li>
+                            <ul>
+                                <li>Homelessness describes the situation of an individual or family without stable, permanent, appropriate housing, or the immediate prospect, means and ability of acquiring it</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>What causes a person to become homeless??</strong></li>
+                            <ul>
+                                <li>There are many many many factors that causes a person to become homeless. Some prominent ones are debt, job loss leading to permanent unemployment, mental or physical health problems and severe trauma. If you know anyone who is experience these things, please reach out and help them!</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>I really want to help, how can I help??</strong></li>
+                            <ul>
+                                <li>Well, I'm glad you asked! You can help us by taking a looking at our <a href="donate.html">donate page</a>! </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>I'm with a news organization, may I interview you?</strong></li>
+                            <ul>
+                                <li>Of course! We'd love to help spread awareness about the problem that we are tackling! Please just contact us by submitting a form below with the appropriate subject heading!</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>How do you collect data on homelessness?</strong></li>
+                            <ul>
+                                <li>Well, there are several ways we do this: we often get help from a researcher who specializes in sociology and they conduct the data collection for us. We also register all persons who we help so that we know who they are in the future so everything can go smoothly for their next visit!</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>I tried to access a link on this website, but it's broken!</strong></li>
+                            <ul>
+                                <li>We apologize for any broken links, please report them to <a href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a></li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li><strong>Can I share information that I have obtained from this website?</strong></li>
+                            <ul>
+                                <li>Of course! We just ask that you do not commercialize any information that you may find on this website as it will infringe on our copyrights!</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
 
-                <label for="email"><b>Email Address</b></label><br>
-                <input type="email" id="email" name="email" placeholder="johndoe123@mail.com"><br><br>
+            </div>
 
-                <label for="subject"><b>Subject</b></label><br>
-                <input type="text" id="subject" name="subject" placeholder="Inquiry Subject Header"><br><br>
+            <div class="row row-content section parabody">
+                <div class="row">
+                    <div class="col-6">
+                        <h1>How to contact us</h1>
+                        <div class="col-12">
+                            <strong>Our phone numbers:</strong>
+                            <p>Main phone-line<a href="tel:306-444-4444" style="text-decoration: none; color: black;"> 306-444-4444<span class="fa fa-phone"></span></a></p>
+                            <p>Health Services<a href="tel:306-123-4567" style="text-decoration: none; color: black;"> 306-123-4567<span class="fa fa-phone"></span></a></p>
+                            <p>Education<a href="tel:306-098-7654" style="text-decoration: none; color: black;"> 306-098-7654<span class="fa fa-phone"></span></a></p>
+                            <p>Shelter needs<a href="tel:306-123-4444" style="text-decoration: none; color: black;"> 306-123-4444<span class="fa fa-phone"></span></a></p>
+                        </div>
+                        <div class="col-12" style="margin-top: 20px;">
+                            <strong>Our fax: </strong><a href="tel:306-555-5555" style="text-decoration: none; color:black;"> 306-555-5555
+                            <span class="fa fa-fax"></span></a>
+                        </div>
+                        <div class="col-12" style="margin-top: 20px;">
+                            <strong>Our email: </strong><a href="mailto:helphomelessness@helpus.ca" style="text-decoration: none; color:black;">helphomelessness@helpus.ca
+                            <span class="fa fa-envelope"></span></a>
+                        </div>
+                        <div class="col-12" style="margin-top: 20px;">
+                            <strong>Our main office:</strong> 123 Saskatoon Street, Saskatoon, SK, Canada, A1B 2C3
+                            <span class="fa fa-address-book"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <img src="img/fakeAd.png" class="img-fluid" style="height:400px; width: auto">
+                    </div>
+                </div>
 
-                <label for="data"><b>Your Inquiry</b></label><br>
-                <textarea id="data" name="data" rows=20 cols=50></textarea><br>
+            </div>
 
-                <button type="submit" onclick="userConfirmation()">Submit my inquiry</button>
+
+            <h1>Still have questions? Send us an email!</h1>
+            <form class="form-inline" action="/inquiry/addInquiry" method="POST">
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="name">Name</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Ex: John Doe">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="email">Email Address</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Ex: jdoe@gmail.com">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="subj">Subject</label>
+                    <div class="col-12">
+                        <input type="text" class="form-control" id="subj" name="subj" placeholder="Ex: At risk of homelessness">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label class="col-form-label col-12" for="inq">Inquiry</label>
+                    <div class="col-12">
+                        <textarea rows="10" class="form-control" id="inq" name="inq" placeholder="Write your inquiry here"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="addInquiry()" id="submitBtn">
+                    Submit new inquiry</button>
+
+                <div class="alert alert-danger alert-dismissible collapse" role="alert" id="missingField">
+                    <strong>Missing required fields!</strong> You need to fill out all required fields below!
+                    <button type="button" class="btn-close alertClose"></button>
+                </div>
+
+
+                <div class="alert alert-success alert-dismissible collapse" role="alert" id="inqSuccess">
+                    <strong>Successfully sent an inquiry!</strong>
+                    <button type="button" class="btn-close alertClose"></button>
+                </div>
+
             </form>
-
         </div>
+
+
 
     </body>        
 
-    <footer>
-        <hr id="footerLineSep">
-        <div class="space">
-            <a class="left" href="contactus.html">Contact us</a> <a class="mid" href="twitter.com">Twitter</a> <a class="right" href="https://www.google.com/maps/place/University+of+Saskatchewan/@52.1334003,-106.6335469,17z/data=!3m1!4b1!4m5!3m4!1s0x5304f6b0fa94a483:0x797aa81f58d9c92a!8m2!3d52.1334003!4d-106.6313582">123 Address Street</a>
-            <a class="left" href="aboutus.html">About us</a> <a class="mid" href="facebook.com">Facebook</a> <a class="right" href="tel:306-123-4567">306-123-4567</a>
-            <a class="left" href="donate.html">Donate</a> <a class="mid" href="youtube.com">YouTube</a> <a class="right" href="mailto:helphomelessness@helpus.ca">helphomelessness@helpus.ca</a>
-            <a class="left" href="getinvolved.html">Get Involved</a> <a class="mid" href="instagram.com">Instagram</a> <a class="right" href="contactus.html">FAQ</a>
-            <a class="left" href="needhelp.html">Need help?</a> <a class="mid" href="linkedin.ca">LinkedIn</a> <p class="right">Open Mon. to Sat. from 7:00 AM to 8:00 PM</p>
-        </div>
-    </footer>
+
+    <div id="footer"></div>
+
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+
+
 <script>
-    function userConfirmation(){
-        alert("Thank you for submitting your inquiry!\n It will take us approximately 3 business days to contact you. If it is urgent, please call our phone number: 306-123-4567")
+    $(() => {
+        $("#header").load("header.html");
+        $("#footer").load("footer.html");
+    })
+
+    // Handles all button closing clicks
+    $('.alertClose').click(function(){
+        $(this).parent().hide("fade");
+    });
+
+    function addInquiry(){
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var subj = document.getElementById("subj").value;
+        var inq = document.getElementById("inq").value;
+        if(subj.length == 0 || name.length == 0 || inq.length == 0 || email.length == 0){
+            $("#missingField").show("fade");
+            setTimeout(() => {
+                $("#missingField").hide("fade");
+            },10000);
+        }
+        else{
+            setTimeout(() => {
+                var http = new XMLHttpRequest;
+                http.open("GET", "/inquiry/loadInquiries", true);
+                http.onreadystatechange = function() {
+                    if(http.readyState == 4 && http.status == 200){
+                        $("#inqSuccess").show("fade");
+                        setTimeout(() => {
+                            $("#inqSuccess").hide("fade");
+                        }, 5000);
+                    }
+                }
+                http.send();
+            },500);
+        }
     }
 </script>
