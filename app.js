@@ -5,16 +5,13 @@ const express = require("express");
 const path = require("path");
 const fs = require('fs');
 
-const key = fs.readFileSync("./selfsigned.key");
-const cert = fs.readFileSync("./selfsigned.crt");
+const key = fs.readFileSync("./key.pem");
+const cert = fs.readFileSync("./cert.pem");
 const app = express();
 
 const https = require("https");
-const http = require("http");
 
 const httpsServer = https.createServer({key: key, cert: cert}, app);
-const httpServer = http.createServer(app);
-
 
 app.use(bodyparser.urlencoded({extended: true}));
 
@@ -96,9 +93,8 @@ app.use("/inquiry", inquiryRoute);
 
 
 app.use("/", express.static(path.join(__dirname, "./views")));
-// httpServer.listen(PORT, () => {console.log("http listening on port 3000")});
-httpsServer.listen(3001, () => {console.log("https secure listening on port 3001")});
+httpsServer.listen(PORT, HOST);
 
-app.listen(PORT, HOST);
+// app.listen(PORT, HOST);
 // console.log("Server alive\n");
 
