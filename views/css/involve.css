@@ -1,0 +1,16 @@
+.jumbotron{
+    padding-top: 100px;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    background-color: #2ba3e3;
+    /*border-bottom: 2px ridge;*/
+}
+
+
+.section{
+    margin-bottom: 70px;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 3px ridge;
+    min-height: 400px;
+    margin-top: -70px;
+}

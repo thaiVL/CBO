@@ -2,3 +2,23 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.section{
+    margin-bottom: 70px;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 3px ridge;
+    min-height: 400px;
+    margin-top: -70px;
+}
+
+.miniSection{
+    padding-bottom: 40px;
+    pading-top: 40px;
+    /*border-bottom: 3px ridge;*/
+    /*border-width: 50px;*/
+    /*bottom: 0;*/
+}
+
+.parabody{
+    font-size: 17px;
+}
