@@ -84,7 +84,7 @@ async function updateInquiry(data){
                 reject(err);
             }
             else{
-                resolve("Successfully updated customer");
+                resolve("Successfully updated inquiry");
             }
         })
     })
@@ -126,8 +126,8 @@ router.post("/addInquiry", (req, res) => {
         res.status(204).send();
     })
     .catch(() => {
-        console.log("Error: failed to add new customer into the customer database");
-        res.status(204).send("Failed to add customer to database");
+        console.log("Error: failed to add new inquiry into the inquiry database");
+        res.status(204).send("Failed to add inquiry to database");
     })
 })
 
@@ -156,10 +156,10 @@ router.put("/inquiryView", (req, res) => {
 router.put("/updateInfo", (req, res) => {
     updateInquiry(req.body)
         .then(() => {
-            res.send("Successfully updated customer");
+            res.send("Successfully updated inquiry");
         })
         .catch(() => {
-            console.log("Error: failed to update customer");
+            console.log("Error: failed to update inquiry");
         })
 })
 
