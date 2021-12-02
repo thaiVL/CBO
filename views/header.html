@@ -71,16 +71,16 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="loginForm">
                             <div class="form-row">
                                 <div class="form-group col-sm-4">
-                                    <label class="" for="exampleInputEmail3"><strong>Email address</strong></label>
-                                    <input type="email" class="form-control form-control-sm me-1" id="exampleInputEmail3"
+                                    <label class="" for="emailLogin"><strong>Email address</strong></label>
+                                    <input type="email" class="form-control form-control-sm me-1" id="emailLogin"
                                            placeholder="Email: youremail@domain.net">
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label class="" for="exampleInputPassword3"><strong>Password</strong></label>
-                                    <input type="password" class="form-control form-control-sm me-1" id="exampleInputPassword3"
+                                    <label class="" for="passLogin"><strong>Password</strong></label>
+                                    <input type="password" class="form-control form-control-sm me-1" id="passLogin"
                                            placeholder="Password: yourpassword">
                                 </div>
                                 <div class="col-sm-auto">
@@ -95,6 +95,10 @@
                                 <button type="submit" class="btn btn-primary btn-sm ml-1" onclick="login()">Sign in</button>
                             </div>
                         </form>
+                        <div class="alert alert-danger alert-dismissible collapse" role="alert" id="error">
+<!--                            <strong>Missing required fields!</strong> You need to fill out all required fields below!-->
+<!--                            <button type="button" class="btn-close alertClose"></button>-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,11 +117,42 @@
         document.getElementById("dashbutton").style.visibility = localStorage.getItem("dash");
         document.getElementById("logoutbtn").style.visibility = localStorage.getItem("logout");
         document.getElementById("loginbtn").style.visibility = localStorage.getItem("login");
+        $("#loginForm").submit(function(e){
+            e.preventDefault();
+        })
+        $('.alertClose').click(function(){
+            $(this).parent().hide("fade");
+        });
 
         function login(){
-            localStorage.setItem("dash", "visible");
-            localStorage.setItem("logout", "visible");
-            localStorage.setItem("login", "hidden");
+            var http = new XMLHttpRequest;
+            http.open("PUT", "/login/check", true)
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http.onreadystatechange = function() {
+                if(http.readyState == 4 && http.status == 200){
+                    // var data = JSON.parse(http.response);
+                    localStorage.setItem("dash", "visible");
+                    localStorage.setItem("logout", "visible");
+                    localStorage.setItem("login", "hidden");
+                    window.location.href=window.location.href;
+                }
+                if(http.readyState == 4 && http.status == 400){
+                    // console.log(http.response);
+                    $("#error").html(`${http.response}
+                            <button type="button" class="btn-close alertClose"></button>`);
+                    setTimeout(() => {
+                        $("#error").show("fade");
+                        setTimeout(() => {
+                            $("#error").hide("fade");
+                        }, 5000);
+                    })
+                }
+            }
+            var email = document.getElementById("emailLogin").value;
+            var pass = document.getElementById("passLogin").value;
+
+            http.send(`email=${email}&pass=${pass}`);
+
         }
 
         function logout(){

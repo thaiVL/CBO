@@ -21,6 +21,7 @@ const HOST = "0.0.0.0";
 const staffRoute = require("./routes/staffRoute");
 const customerRoute = require("./routes/customerRoute");
 const inquiryRoute = require("./routes/inquiry");
+const loginRoute = require("./routes/login");
 
 // DELETE DB CONNECTION AFTER FINISH ROUTING
 var sql = require("mysql");
@@ -85,7 +86,7 @@ app.use("/inquiry", inquiryRoute);
 
 
 
-
+app.use("/login", loginRoute);
 
 
 
